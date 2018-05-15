@@ -1,18 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   md5.h                                              :+:      :+:    :+:   */
+/*   ft_strequ.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/15 17:00:28 by amazurok          #+#    #+#             */
-/*   Updated: 2018/05/15 17:03:02 by amazurok         ###   ########.fr       */
+/*   Created: 2017/10/30 16:49:55 by amazurok          #+#    #+#             */
+/*   Updated: 2017/11/03 18:04:23 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MD5_H
-# define MD5_H
+#include "libft.h"
 
-# include "./libft/libft.h"
-
-#endif
+int		ft_strequ(char const *s1, char const *s2)
+{
+	if (!s1 || !s2)
+		return (0);
+	else if (ft_strcmp(s1, s2) == 0)
+		return (1);
+	else
+		return (0);
+}

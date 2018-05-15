@@ -1,18 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   md5.h                                              :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/15 17:00:28 by amazurok          #+#    #+#             */
-/*   Updated: 2018/05/15 17:03:02 by amazurok         ###   ########.fr       */
+/*   Created: 2017/10/26 15:14:05 by amazurok          #+#    #+#             */
+/*   Updated: 2017/11/03 13:49:27 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MD5_H
-# define MD5_H
+int		ft_strcmp(const char *s1, const char *s2)
+{
+	int i;
 
-# include "./libft/libft.h"
-
-#endif
+	i = 0;
+	while ((s1[i] == s2[i]) && (s1[i] && s2[i]))
+		i++;
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+}

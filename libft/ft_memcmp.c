@@ -1,18 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   md5.h                                              :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/15 17:00:28 by amazurok          #+#    #+#             */
-/*   Updated: 2018/05/15 17:03:02 by amazurok         ###   ########.fr       */
+/*   Created: 2017/10/29 12:29:54 by amazurok          #+#    #+#             */
+/*   Updated: 2017/11/03 12:25:56 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MD5_H
-# define MD5_H
+#include "libft.h"
 
-# include "./libft/libft.h"
+int		ft_memcmp(const void *s1, const void *s2, size_t n)
+{
+	unsigned char	*a;
+	unsigned char	*b;
+	size_t			i;
 
-#endif
+	a = (unsigned char*)s1;
+	b = (unsigned char*)s2;
+	i = 0;
+	while (i < n)
+	{
+		if (a[i] != b[i])
+			return (a[i] - b[i]);
+		i++;
+	}
+	return (0);
+}

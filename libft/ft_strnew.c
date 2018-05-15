@@ -1,18 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   md5.h                                              :+:      :+:    :+:   */
+/*   ft_strnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/15 17:00:28 by amazurok          #+#    #+#             */
-/*   Updated: 2018/05/15 17:03:02 by amazurok         ###   ########.fr       */
+/*   Created: 2017/10/30 09:56:03 by amazurok          #+#    #+#             */
+/*   Updated: 2017/10/30 10:32:29 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MD5_H
-# define MD5_H
+#include "libft.h"
 
-# include "./libft/libft.h"
+char	*ft_strnew(size_t size)
+{
+	char	*res;
+	size_t	i;
 
-#endif
+	i = 0;
+	if (!(res = (char *)malloc(sizeof(char) * (size + 1))))
+		return (NULL);
+	while (i <= size)
+		res[i++] = '\0';
+	return (res);
+}

@@ -1,18 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   md5.h                                              :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/15 17:00:28 by amazurok          #+#    #+#             */
-/*   Updated: 2018/05/15 17:03:02 by amazurok         ###   ########.fr       */
+/*   Created: 2017/10/29 13:56:52 by amazurok          #+#    #+#             */
+/*   Updated: 2017/10/29 18:55:38 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MD5_H
-# define MD5_H
+#include "libft.h"
 
-# include "./libft/libft.h"
+char	*ft_strchr(const char *s, int c)
+{
+	char	*a;
+	int		i;
 
-#endif
+	a = (char*)s;
+	i = 0;
+	while (a[i])
+		if (a[i++] == c)
+			return (a + i - 1);
+	if (a[i] == c)
+		return (a + i);
+	else
+		return (NULL);
+}

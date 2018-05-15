@@ -1,18 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   md5.h                                              :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/15 17:00:28 by amazurok          #+#    #+#             */
-/*   Updated: 2018/05/15 17:03:02 by amazurok         ###   ########.fr       */
+/*   Created: 2017/10/27 12:57:17 by amazurok          #+#    #+#             */
+/*   Updated: 2017/10/29 18:56:22 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MD5_H
-# define MD5_H
+#include "libft.h"
 
-# include "./libft/libft.h"
+void	*ft_memset(void *b, int c, size_t len)
+{
+	unsigned char *a;
+	unsigned long i;
 
-#endif
+	a = (unsigned char*)b;
+	i = 0;
+	while (i < len)
+		a[i++] = (unsigned char)c;
+	return (b);
+}

@@ -1,29 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/15 16:54:31 by amazurok          #+#    #+#             */
-/*   Updated: 2018/05/15 17:04:57 by amazurok         ###   ########.fr       */
+/*   Created: 2017/10/27 11:57:55 by amazurok          #+#    #+#             */
+/*   Updated: 2018/03/23 10:53:58 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "md5.h"
+#include "libft.h"
 
-void	ft_md5(char *str, size_t len)
+char	*ft_strstr(const char *str, const char *to_find)
 {
-	//DO
-}
+	int i;
+	int j;
+	int k;
 
-int		main(int c, char **v)
-{
-	size_t len;
-
-	if (c == 2)
+	i = 0;
+	if (!to_find[0])
+		return (char*)(str);
+	while (str && str[i])
 	{
-		len = ft_strlen(v[1]);
-		ft_md5(v[1], len);
+		j = 0;
+		if (str[i] == to_find[j])
+		{
+			k = i;
+			while (to_find[j] != '\0' && str[k] == to_find[j])
+			{
+				if (to_find[j + 1] == '\0' && str[k] == to_find[j])
+					return (char*)(str + i);
+				k++;
+				j++;
+			}
+		}
+		i++;
 	}
+	return (NULL);
 }

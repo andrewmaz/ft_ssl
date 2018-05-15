@@ -1,18 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   md5.h                                              :+:      :+:    :+:   */
+/*   ft_deldstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/15 17:00:28 by amazurok          #+#    #+#             */
-/*   Updated: 2018/05/15 17:03:02 by amazurok         ###   ########.fr       */
+/*   Created: 2018/05/06 09:16:52 by amazurok          #+#    #+#             */
+/*   Updated: 2018/05/06 09:56:15 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MD5_H
-# define MD5_H
+#include "libft.h"
 
-# include "./libft/libft.h"
+void	ft_dstrdel(char ***dstr)
+{
+	int		i;
+	char	**tmp;
 
-#endif
+	i = 0;
+	tmp = *dstr;
+	if (!tmp)
+		return ;
+	while (tmp[i])
+		ft_strdel(&tmp[i++]);
+	free(*dstr);
+	*dstr = NULL;
+}

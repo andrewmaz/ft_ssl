@@ -1,18 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   md5.h                                              :+:      :+:    :+:   */
+/*   ft_memccpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/15 17:00:28 by amazurok          #+#    #+#             */
-/*   Updated: 2018/05/15 17:03:02 by amazurok         ###   ########.fr       */
+/*   Created: 2017/10/29 10:43:46 by amazurok          #+#    #+#             */
+/*   Updated: 2017/11/03 11:42:58 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MD5_H
-# define MD5_H
+#include "libft.h"
 
-# include "./libft/libft.h"
+void	*ft_memccpy(void *d, const void *src, int c, size_t n)
+{
+	unsigned char	*a;
+	unsigned char	*b;
+	size_t			i;
 
-#endif
+	a = (unsigned char*)d;
+	b = (unsigned char*)src;
+	i = 0;
+	while (i < n)
+	{
+		a[i] = b[i];
+		if (b[i] == (unsigned char)c)
+			return (a + i + 1);
+		i++;
+	}
+	return (NULL);
+}

@@ -1,18 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   md5.h                                              :+:      :+:    :+:   */
+/*   ft_intrealloc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/15 17:00:28 by amazurok          #+#    #+#             */
-/*   Updated: 2018/05/15 17:03:02 by amazurok         ###   ########.fr       */
+/*   Created: 2018/05/12 12:43:43 by amazurok          #+#    #+#             */
+/*   Updated: 2018/05/12 12:43:43 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MD5_H
-# define MD5_H
+#include "libft.h"
 
-# include "./libft/libft.h"
+int		*ft_intrealloc(int *arr, int oldsize)
+{
+	int *new;
+	int i;
 
-#endif
+	i = 0;
+	new = (int*)malloc(sizeof(int) * (oldsize + 1));
+	if (arr)
+	{
+		while (i < oldsize)
+		{
+			new[i] = arr[i];
+			i++;
+		}
+		free(arr);
+	}
+	return (new);
+}
