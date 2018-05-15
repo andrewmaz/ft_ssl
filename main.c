@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: amazurok <amazurok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 16:54:31 by amazurok          #+#    #+#             */
-/*   Updated: 2018/05/15 17:04:57 by amazurok         ###   ########.fr       */
+/*   Updated: 2018/05/15 17:24:01 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,12 @@
 
 void	ft_md5(char *str, size_t len)
 {
-	//DO
+	size_t len1;
+
+	len1 = len;
+	while (len % 512 != 448)
+		len1++;
+	ft_putnbr(len1);
 }
 
 int		main(int c, char **v)
