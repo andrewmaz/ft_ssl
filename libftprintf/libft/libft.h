@@ -96,6 +96,7 @@ int					ft_num_word(const char *s, char c);
 int					ft_len_word(const char *s, char c);
 
 int					get_next_line(const int fd, char **line);
+int					ft_printf(const char *format, ...);
 
 void				ft_dstrdel(char ***dstr);
 int					*ft_intrealloc(int *arr, int oldsize);

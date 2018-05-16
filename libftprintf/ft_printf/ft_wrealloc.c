@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   md5.h                                              :+:      :+:    :+:   */
+/*   ft_wrealloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/15 17:00:28 by amazurok          #+#    #+#             */
-/*   Updated: 2018/05/16 16:44:35 by amazurok         ###   ########.fr       */
+/*   Created: 2018/02/04 19:40:02 by amazurok          #+#    #+#             */
+/*   Updated: 2018/05/16 11:51:00 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MD5_H
-# define MD5_H
+#include "ft_printf.h"
 
-# define LEN 8
-# define BYTE 8
-
-# include "./libftprintf/libft/libft.h"
-
-typedef struct	s_const
+wchar_t	*ft_myrealloc(wchar_t *wtr, size_t size)
 {
-  	unsigned int	v;
-  	struct s_const	*next;
-}				t_const;
+	wchar_t *nwres;
 
-#endif
+	nwres = (wchar_t*)malloc(sizeof(wchar_t) * (size + 1));
+	nwres = ft_wtrzero(nwres, size + 1);
+	if (wtr)
+	{
+		nwres = ft_wtrcpy(nwres, wtr);
+		ft_wstrdel(&wtr);
+	}
+	return (nwres);
+}

@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   md5.h                                              :+:      :+:    :+:   */
+/*   ft_search_in_line.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/15 17:00:28 by amazurok          #+#    #+#             */
-/*   Updated: 2018/05/16 16:44:35 by amazurok         ###   ########.fr       */
+/*   Created: 2018/02/02 17:30:48 by amazurok          #+#    #+#             */
+/*   Updated: 2018/02/02 17:31:13 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MD5_H
-# define MD5_H
+#include "ft_printf.h"
 
-# define LEN 8
-# define BYTE 8
-
-# include "./libftprintf/libft/libft.h"
-
-typedef struct	s_const
+int		ft_srchinstr(char *line, char c)
 {
-  	unsigned int	v;
-  	struct s_const	*next;
-}				t_const;
+	int i;
 
-#endif
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] == c)
+			return (1);
+		i++;
+	}
+	return (0);
+}

@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   md5.h                                              :+:      :+:    :+:   */
+/*   ft_wstrzero.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/15 17:00:28 by amazurok          #+#    #+#             */
-/*   Updated: 2018/05/16 16:44:35 by amazurok         ###   ########.fr       */
+/*   Created: 2018/02/04 19:41:22 by amazurok          #+#    #+#             */
+/*   Updated: 2018/02/04 19:41:26 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MD5_H
-# define MD5_H
+#include "ft_printf.h"
 
-# define LEN 8
-# define BYTE 8
-
-# include "./libftprintf/libft/libft.h"
-
-typedef struct	s_const
+wchar_t	*ft_wtrzero(wchar_t *w1, int n)
 {
-  	unsigned int	v;
-  	struct s_const	*next;
-}				t_const;
+	int i;
 
-#endif
+	i = 0;
+	while (i < n)
+		w1[i++] = 0;
+	return (w1);
+}

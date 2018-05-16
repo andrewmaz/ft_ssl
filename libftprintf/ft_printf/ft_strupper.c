@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   md5.h                                              :+:      :+:    :+:   */
+/*   ft_strupper.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/15 17:00:28 by amazurok          #+#    #+#             */
-/*   Updated: 2018/05/16 16:44:35 by amazurok         ###   ########.fr       */
+/*   Created: 2018/01/23 12:26:39 by amazurok          #+#    #+#             */
+/*   Updated: 2018/01/23 12:26:42 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MD5_H
-# define MD5_H
+#include "ft_printf.h"
 
-# define LEN 8
-# define BYTE 8
-
-# include "./libftprintf/libft/libft.h"
-
-typedef struct	s_const
+char	*ft_struper(char *str)
 {
-  	unsigned int	v;
-  	struct s_const	*next;
-}				t_const;
+	int i;
 
-#endif
+	i = -1;
+	while (str[++i])
+		str[i] = (char)ft_toupper(str[i]);
+	return (str);
+}

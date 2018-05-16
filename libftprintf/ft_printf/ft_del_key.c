@@ -1,27 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   md5.h                                              :+:      :+:    :+:   */
+/*   ft_del_key.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: amazurok <amazurok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/15 17:00:28 by amazurok          #+#    #+#             */
-/*   Updated: 2018/05/16 16:44:35 by amazurok         ###   ########.fr       */
+/*   Created: 2018/02/04 19:37:31 by amazurok          #+#    #+#             */
+/*   Updated: 2018/02/19 16:34:14 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MD5_H
-# define MD5_H
+#include "ft_printf.h"
 
-# define LEN 8
-# define BYTE 8
-
-# include "./libftprintf/libft/libft.h"
-
-typedef struct	s_const
+void	ft_del_key(t_key *key)
 {
-  	unsigned int	v;
-  	struct s_const	*next;
-}				t_const;
-
-#endif
+	free(key->flag);
+	free(key->modtype);
+	ft_wstrdel(&key->nwres);
+	free(key);
+}

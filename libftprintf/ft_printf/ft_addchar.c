@@ -1,27 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   md5.h                                              :+:      :+:    :+:   */
+/*   ft_addchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: amazurok <amazurok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/15 17:00:28 by amazurok          #+#    #+#             */
-/*   Updated: 2018/05/16 16:44:35 by amazurok         ###   ########.fr       */
+/*   Created: 2018/01/31 14:54:41 by amazurok          #+#    #+#             */
+/*   Updated: 2018/02/02 16:55:50 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MD5_H
-# define MD5_H
-
-# define LEN 8
-# define BYTE 8
-
-# include "./libftprintf/libft/libft.h"
-
-typedef struct	s_const
+char	*ft_addchar(char *str, char c, int k, int s)
 {
-  	unsigned int	v;
-  	struct s_const	*next;
-}				t_const;
-
-#endif
+	while (str[s])
+		s++;
+	k = k + s;
+	while (s < k)
+		str[s++] = c;
+	return (str);
+}
