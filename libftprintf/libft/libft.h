@@ -102,5 +102,6 @@ void				ft_dstrdel(char ***dstr);
 int					*ft_intrealloc(int *arr, int oldsize);
 char				*ft_realcat(char *input, char *str);
 char				*ft_realcatendl(char *input, char *str);
+void				ft_set_val(int *a, int *b, int an, int bn);
 
 #endif
