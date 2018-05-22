@@ -6,7 +6,7 @@
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/20 17:28:50 by amazurok          #+#    #+#             */
-/*   Updated: 2018/05/21 16:48:09 by amazurok         ###   ########.fr       */
+/*   Updated: 2018/05/22 15:32:53 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,40 +45,18 @@ t_md5	*ft_new_md5(void)
 	return (a);
 }
 
-t_sha256	*ft_new_buf(void)
+t_uint *ft_create_buf(void)
 {
-	t_sha256 *new;
+	t_uint	*buf;
 
-	new = (t_sha256 *)malloc(sizeof(t_sha256));
-	new->next = NULL;
-	new->prev = NULL;
-	new->old = 0;
-	new->v = 0;
-	return (new);
-}
-
-void	ft_addend_sha256(t_sha256 *head, t_sha256 *end, unsigned int val)
-{
-	while (head->next)
-		head = head->next;
-	head->next = end;
-	end->prev = head;
-	end->old = val;
-}
-
-t_sha256	*ft_new_sha256(void)
-{
-	t_sha256 *a;
-
-	a = ft_new_buf();
-	ft_addend_sha256(a, ft_new_buf(), 0xBB67AE85);
-	ft_addend_sha256(a, ft_new_buf(), 0x3C6EF372);
-	ft_addend_sha256(a, ft_new_buf(), 0xA54FF53A);
-	ft_addend_sha256(a, ft_new_buf(), 0x510E527F);
-	ft_addend_sha256(a, ft_new_buf(), 0x9B05688C);
-	ft_addend_sha256(a, ft_new_buf(), 0x1F83D9AB);
-	ft_addend_sha256(a, ft_new_buf(), 0x5BE0CD19);
-	ft_addend_sha256(a, a, 0x6A09E667);
-
-	return (a);
+	buf = (t_uint *)malloc(sizeof(t_uint) * 8);
+	buf[0] = 0x6A09E667;
+	buf[1] = 0xBB67AE85;
+	buf[2] = 0x3C6EF372;
+	buf[3] = 0xA54FF53A;
+	buf[4] = 0x510E527F;
+	buf[5] = 0x9B05688C;
+	buf[6] = 0x1F83D9AB;
+	buf[7] = 0x5BE0CD19;
+	return (buf);
 }

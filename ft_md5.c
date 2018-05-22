@@ -6,7 +6,7 @@
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 16:22:23 by amazurok          #+#    #+#             */
-/*   Updated: 2018/05/21 17:43:12 by amazurok         ###   ########.fr       */
+/*   Updated: 2018/05/22 17:47:35 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ unsigned int	*ft_to_arr(unsigned int a, unsigned int b, unsigned int c)
 	return (res);
 }
 
-void			ft_in_rounds(t_md5 *a, unsigned int *msg, unsigned int *s)
+void			ft_in_rounds_md5(t_md5 *a, unsigned int *msg, const unsigned int *s)
 {
 	unsigned int r[4];
 
@@ -68,7 +68,7 @@ void			ft_rounds_md5(t_md5 *a, unsigned int *msg, size_t len1)
 		a->next->v = a->next->old;
 		a->next->next->v = a->next->next->old;
 		a->next->next->next->v = a->next->next->next->old;
-		ft_in_rounds(a, msg + b, r);
+		ft_in_rounds_md5(a, msg + b, r);
 		a->old += a->v;
 		a->next->old += a->next->v;
 		a->next->next->old += a->next->next->v;

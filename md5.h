@@ -6,52 +6,67 @@
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 17:00:28 by amazurok          #+#    #+#             */
-/*   Updated: 2018/05/21 17:18:44 by amazurok         ###   ########.fr       */
+/*   Updated: 2018/05/22 18:48:09 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MD5_H
 # define MD5_H
 
-# define LEN 8
-# define BYTE 8
+# define LEN_BLCK 8
+# define BIT 8
+# define A 0
+# define B 1
+# define C 2
+# define D 3
+# define E 4
+# define F 5
+# define G 6
+# define H 7
+
 
 # include "./libftprintf/libft/libft.h"
+#include <fcntl.h>
+
+typedef unsigned int	t_uint;
 
 typedef struct	s_md5
 {
-  	unsigned int	v;
-  	unsigned int	old;
+  t_uint	v;
+  t_uint	old;
   	struct s_md5	*next;
   	struct s_md5	*prev;
 }				t_md5;
 
-typedef struct	s_sha256
-{
-  unsigned int	v;
-  unsigned int	old;
-  struct s_sha256	*next;
-  struct s_sha256	*prev;
-}				t_sha256;
-
 typedef struct	s_kkey
 {
+  int		md5;
+  int		sha256;
   int		p;
   int		q;
   int		r;
-  int		s;
+  char		*s;
+  int		*fd;
+  char		**fn;
+  int 		n_fd;
 }				t_kkey;
 
-
 t_md5			*ft_new_md5(void);
-t_sha256		*ft_new_sha256(void);
-unsigned int	f_f(unsigned int x, unsigned int y, unsigned int z);
-unsigned int	f_g(unsigned int x, unsigned int y, unsigned int z);
-unsigned int	f_h(unsigned int x, unsigned int y, unsigned int z);
-unsigned int	f_i(unsigned int x, unsigned int y, unsigned int z);
-void			ft_r(t_md5 *h, unsigned int *wsi, unsigned int (*f1)(unsigned int, unsigned int, unsigned int));
-unsigned int *ft_new_msg(unsigned char *str, size_t nlen, size_t len);
-void	ft_rounds_md5(t_md5 *a, unsigned int *msg, size_t len1);
-void	ft_print_result(t_md5 *a);
+t_uint			f_f(t_uint x, t_uint y, t_uint z);
+t_uint			f_g(t_uint x, t_uint y, t_uint z);
+t_uint			f_h(t_uint x, t_uint y, t_uint z);
+t_uint			f_i(t_uint x, t_uint y, t_uint z);
+void			ft_r(t_md5 *h, t_uint *wsi, t_uint (*f1)(t_uint, t_uint, t_uint));
+t_uint			*ft_msg_md5(unsigned char *str, size_t nlen, size_t len);
+void			ft_rounds_md5(t_md5 *a, t_uint *msg, size_t len1);
+void			ft_print_res_md5(t_md5 *a, t_kkey key);
+void			ft_print_res_sha(t_uint *hash, t_kkey key);
+int				ft_read_key(int c, char **v, t_kkey *key);
+t_uint			*ft_msg_sha(unsigned char *str, size_t nlen, size_t len);
+void			ft_rounds_sha256(t_uint *msg, size_t len, t_uint **in);
+t_uint			*ft_gen_addwords(t_uint *msg);
+t_uint			ft_rotr(t_uint x, int s);
+t_uint			*ft_create_buf(void);
+void	ft_algo(const char *str, size_t len, t_kkey key);
 
 #endif

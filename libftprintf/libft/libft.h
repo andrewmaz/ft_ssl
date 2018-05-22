@@ -17,7 +17,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <inttypes.h>
-# define BUFF_SIZE 10
+# define BUFF_SIZE 1000000
 
 ssize_t				ft_atoi(const char *str);
 void				ft_bzero(void *s, size_t n);
@@ -101,7 +101,7 @@ int					ft_printf(const char *format, ...);
 void				ft_dstrdel(char ***dstr);
 int					*ft_intrealloc(int *arr, int oldsize);
 char				*ft_realcat(char *input, char *str);
-char				*ft_realcatendl(char *input, char *str);
+char				*ft_realcatendl(char *old, char *str);
 void				ft_set_val(int *a, int *b, int an, int bn);
 
 #endif
