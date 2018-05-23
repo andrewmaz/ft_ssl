@@ -6,7 +6,7 @@
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 18:54:58 by amazurok          #+#    #+#             */
-/*   Updated: 2018/05/22 18:54:58 by amazurok         ###   ########.fr       */
+/*   Updated: 2018/05/23 13:33:03 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_del_m(t_md5 *lst)
 	}
 }
 
-void	ft_algo(const char *str, size_t len, t_kkey key)
+void	ft_algo(const char *str, size_t len, t_kkey *key, int k)
 {
 	size_t			len1;
 	unsigned char	*mg;
@@ -46,10 +46,10 @@ void	ft_algo(const char *str, size_t len, t_kkey key)
 	mg[len] = 0x80;
 	len *= BIT;
 	s = NULL;
-	m = key.md5 ? ft_new_md5() : NULL;
-	msg = key.md5 ? ft_msg_md5(mg, len1, len) : ft_msg_sha(mg, len1, len);
-	key.md5 ? ft_rounds_md5(m, msg, len1) : ft_rounds_sha256(msg, len1, &s);
-	key.md5 ? ft_print_res_md5(m, key) : ft_print_res_sha(s, key);
+	m = key->md5 ? ft_new_md5() : NULL;
+	msg = key->md5 ? ft_msg_md5(mg, len1, len) : ft_msg_sha(mg, len1, len);
+	key->md5 ? ft_rounds_md5(m, msg, len1) : ft_rounds_sha256(msg, len1, &s);
+	key->md5 ? ft_print_res_md5(m, key, k) : ft_print_res_sha(s, key, k);
 	free(mg);
 	free(msg);
 	s ? free(s) : 0;

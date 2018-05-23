@@ -6,13 +6,11 @@
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 18:07:05 by amazurok          #+#    #+#             */
-/*   Updated: 2018/05/22 19:05:41 by amazurok         ###   ########.fr       */
+/*   Updated: 2018/05/23 15:08:35 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "md5.h"
-
-
 
 void	ft_set_v(t_uint *des, t_uint *src)
 {
@@ -59,9 +57,9 @@ t_uint	ft_const_table(int i)
 
 void	ft_in_rounds_sha(t_uint *bf, t_uint *msg, int b)
 {
-	int j;
-	t_uint t[6];
-	t_uint *nmsg;
+	int		j;
+	t_uint	t[6];
+	t_uint	*nmsg;
 
 	j = 0;
 	nmsg = ft_gen_addwords(msg + b);
@@ -88,11 +86,10 @@ void	ft_in_rounds_sha(t_uint *bf, t_uint *msg, int b)
 
 void	ft_rounds_sha256(t_uint *msg, size_t len, t_uint **in)
 {
-	int				i;
-	t_uint			*bf;
-	t_uint			*bn;
-	int				b;
-
+	size_t	i;
+	t_uint	*bf;
+	t_uint	*bn;
+	int		b;
 
 	b = 0;
 	i = 0;
@@ -109,4 +106,3 @@ void	ft_rounds_sha256(t_uint *msg, size_t len, t_uint **in)
 	free(bf);
 	*in = bn;
 }
-

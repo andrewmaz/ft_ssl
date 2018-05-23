@@ -6,13 +6,13 @@
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/20 17:28:50 by amazurok          #+#    #+#             */
-/*   Updated: 2018/05/22 15:32:53 by amazurok         ###   ########.fr       */
+/*   Updated: 2018/05/23 15:00:06 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "md5.h"
 
-t_md5	*ft_new_const(void)
+t_md5		*ft_new_const(void)
 {
 	t_md5 *new;
 
@@ -24,7 +24,7 @@ t_md5	*ft_new_const(void)
 	return (new);
 }
 
-void	ft_addend_md5(t_md5 *head, t_md5 *end, unsigned int val)
+void		ft_addend_md5(t_md5 *head, t_md5 *end, unsigned int val)
 {
 	while (head->next)
 		head = head->next;
@@ -33,9 +33,9 @@ void	ft_addend_md5(t_md5 *head, t_md5 *end, unsigned int val)
 	end->old = val;
 }
 
-t_md5	*ft_new_md5(void)
+t_md5		*ft_new_md5(void)
 {
-	t_md5 *a;
+	t_md5	*a;
 
 	a = ft_new_const();
 	ft_addend_md5(a, ft_new_const(), 0xefcdab89);
@@ -45,7 +45,7 @@ t_md5	*ft_new_md5(void)
 	return (a);
 }
 
-t_uint *ft_create_buf(void)
+t_uint		*ft_create_buf(void)
 {
 	t_uint	*buf;
 

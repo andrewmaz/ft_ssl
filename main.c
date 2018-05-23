@@ -6,7 +6,7 @@
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 16:54:31 by amazurok          #+#    #+#             */
-/*   Updated: 2018/05/22 18:20:29 by amazurok         ###   ########.fr       */
+/*   Updated: 2018/05/23 16:10:51 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,18 @@
 #include <stdio.h>
 #include "md5.h"
 
-
-
-
-char *ft_my_read(int fd)
+char	*ft_my_read(int fd, t_kkey *key)
 {
-	char buf[101];
-	char *str;
+	char	buf[101];
+	char	*str;
 	ssize_t	ret;
 
+	if (fd < 0)
+	{
+		ft_printf("ft_ssl: %s: %s: No such file or directory\n", \
+		key->md5 ? "md5" : "sha256", key->nfn[key->ifn++]);
+		return (NULL);
+	}
 	str = NULL;
 	while ((ret = read(fd, buf, 100)) > 0)
 	{
@@ -34,33 +37,29 @@ char *ft_my_read(int fd)
 
 int		main(int c, char **v)
 {
-	size_t len;
-	int i;
-	char *line;
-	t_kkey key;
+	size_t	len;
+	int		i;
+	char	*line;
+	t_kkey	key;
 
 	i = 0;
 	ft_read_key(c, v, &key);
 	if (!key.md5 && !key.sha256)
-		return (0); //usage
+		ft_help(&key);
 	if ((!key.s && !key.n_fd) || key.p)
 	{
-		line = ft_my_read(0);
+		line = ft_my_read(0, &key);
 		key.p ? ft_printf("%s", line) : 0;
-		len = ft_strlen(line);
-		len > 0 ? ft_algo(line, len, key) : 0;
+		line ? ft_algo(line, ft_strlen(line), &key, 0) : 0;
 	}
-	while (key.s || i < key.n_fd)
+	while (key.is < ft_num_word(key.s, '\n') || i < key.n_fd)
 	{
-		if (key.s)
-		{
-			line = key.s;
-			key.s = NULL;
-		}
-		else
-			line = ft_my_read(key.fd[i++]);
+		line = (key.is < ft_num_word(key.s, '\n')) ? key.ns[key.is] : \
+				ft_my_read(key.fd[i++], &key);
 		len = ft_strlen(line);
-		len > 0 ? ft_algo(line, len, key) : 0;
+		line ? ft_algo(line, len, &key, 1) : 0;
 		ft_strdel(&line);
 	}
+	ft_delkey(&key, 0);
+	//system("leaks ft_ssl");
 }
