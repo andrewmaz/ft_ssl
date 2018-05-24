@@ -66,3 +66,30 @@ void	ft_print_res_sha(t_uint *hash, t_kkey *key, int k)
 		key->is < ft_num_word(key->s, '\n') ? key->is++ : key->ifn++;
 	ft_printf("\n");
 }
+
+void	ft_print_res_sha512(t_ulint *hash, t_kkey *key, int k)
+{
+	int i;
+
+	i = 0;
+	if (k && !key->q && !key->r)
+	{
+		ft_printf("SHA512 (");
+		key->is < ft_num_word(key->s, '\n') ? ft_printf("\"%s\") = ", \
+		key->ns[key->is]) : ft_printf("%s) = ", key->nfn[key->ifn]);
+	}
+	while (i < 8)
+	{
+		ft_printf("%.16zx", hash[i]);
+		i++;
+	}
+	if (k && !key->q && key->r)
+	{
+		key->is < ft_num_word(key->s, '\n') ? ft_printf(" \"%s\"", \
+		key->ns[key->is]) : ft_printf(" %s", key->nfn[key->ifn]);
+	}
+	if (k)
+		key->is < ft_num_word(key->s, '\n') ? key->is++ : key->ifn++;
+	ft_printf("\n");
+}
+

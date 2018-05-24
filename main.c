@@ -6,7 +6,7 @@
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 16:54:31 by amazurok          #+#    #+#             */
-/*   Updated: 2018/05/23 16:10:51 by amazurok         ###   ########.fr       */
+/*   Updated: 2018/05/24 11:17:18 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int		main(int c, char **v)
 
 	i = 0;
 	ft_read_key(c, v, &key);
-	if (!key.md5 && !key.sha256)
+	if (!key.md5 && !key.sha256 && !key.sha512)
 		ft_help(&key);
 	if ((!key.s && !key.n_fd) || key.p)
 	{

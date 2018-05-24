@@ -6,7 +6,7 @@
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/20 17:28:50 by amazurok          #+#    #+#             */
-/*   Updated: 2018/05/23 15:00:06 by amazurok         ###   ########.fr       */
+/*   Updated: 2018/05/24 15:01:45 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,21 @@ t_uint		*ft_create_buf(void)
 	buf[5] = 0x9B05688C;
 	buf[6] = 0x1F83D9AB;
 	buf[7] = 0x5BE0CD19;
+	return (buf);
+}
+
+t_ulint		*ft_create_buf512(void)
+{
+	t_ulint	*buf;
+
+	buf = (t_ulint *)malloc(sizeof(t_ulint) * 8);
+	buf[0] = 0x6a09e667f3bcc908;
+	buf[1] = 0xbb67ae8584caa73b;
+	buf[2] = 0x3c6ef372fe94f82b;
+	buf[3] = 0xa54ff53a5f1d36f1;
+	buf[4] = 0x510e527fade682d1;
+	buf[5] = 0x9b05688c2b3e6c1f;
+	buf[6] = 0x1f83d9abfb41bd6b;
+	buf[7] = 0x5be0cd19137e2179;
 	return (buf);
 }

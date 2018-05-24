@@ -6,7 +6,7 @@
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 11:33:42 by amazurok          #+#    #+#             */
-/*   Updated: 2018/05/23 15:02:11 by amazurok         ###   ########.fr       */
+/*   Updated: 2018/05/24 11:24:40 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	ft_bzero_key(t_kkey *key)
 	key->n_fd = 0;
 	key->md5 = 0;
 	key->sha256 = 0;
+	key->sha512 = 0;
 }
 
 int		ft_set_key(t_kkey *key, int i, char **v, int c)
@@ -50,9 +51,13 @@ int		ft_read_nonmin(t_kkey *key, char **v, int i)
 		key->md5 = 1;
 	else if (ft_strequ(v[i], "sha256") && !key->md5)
 		key->sha256 = 1;
+	else if (ft_strequ(v[i], "sha512") && !key->md5)
+		key->sha512 = 1;
 	else
 		while (v[i])
 		{
+			if (!key->sha512 && !key->sha256 && !key->md5)
+				ft_help(key);
 			key->fd = ft_intrealloc(key->fd, key->n_fd);
 			key->fd[key->n_fd++] = open(v[i], O_RDONLY);
 			key->fn = ft_realcatendl(key->fn, v[i++]);

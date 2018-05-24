@@ -6,7 +6,7 @@
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 18:07:05 by amazurok          #+#    #+#             */
-/*   Updated: 2018/05/23 15:08:35 by amazurok         ###   ########.fr       */
+/*   Updated: 2018/05/24 15:29:46 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,18 +67,18 @@ void	ft_in_rounds_sha(t_uint *bf, t_uint *msg, int b)
 	{
 		t[0] = ft_rotr(bf[A], 2) ^ ft_rotr(bf[A], 13) ^ ft_rotr(bf[A], 22);
 		t[1] = (bf[A] & bf[B]) ^ (bf[A] & bf[C]) ^ (bf[B] & bf[C]);
-		t[2] = t[0] + t[1];
+		t[T2] = t[0] + t[1];
 		t[3] = ft_rotr(bf[E], 6) ^ ft_rotr(bf[E], 11) ^ ft_rotr(bf[E], 25);
 		t[4] = (bf[E] & bf[F]) ^ ((~bf[E]) & bf[G]);
-		t[5] = bf[H] + t[3] + t[4] + ft_const_table(j) + nmsg[j];
+		t[T1] = bf[H] + t[3] + t[4] + ft_const_table(j) + nmsg[j];
 		bf[H] = bf[G];
 		bf[G] = bf[F];
 		bf[F] = bf[E];
-		bf[E] = bf[D] + t[5];
+		bf[E] = bf[D] + t[T1];
 		bf[D] = bf[C];
 		bf[C] = bf[B];
 		bf[B] = bf[A];
-		bf[A] = t[5] + t[2];
+		bf[A] = t[T1] + t[T2];
 		j++;
 	}
 	free(nmsg);

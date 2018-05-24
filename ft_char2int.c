@@ -6,7 +6,7 @@
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 13:27:21 by amazurok          #+#    #+#             */
-/*   Updated: 2018/05/23 15:01:40 by amazurok         ###   ########.fr       */
+/*   Updated: 2018/05/24 12:26:51 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void		ft_add_len_md5(t_uint *arr, int i, size_t len)
 	}
 }
 
-t_uint		*ft_msg_md5(unsigned char *str, size_t nlen, size_t len)
+t_uint		*ft_msg_md5(t_uchar *str, size_t nlen, size_t len)
 {
 	t_uint	*arr;
 	int		i;
@@ -54,7 +54,7 @@ t_uint		*ft_msg_md5(unsigned char *str, size_t nlen, size_t len)
 	return (arr);
 }
 
-void		ft_add_len_sha(t_uint *arr, int i, size_t len)
+void		ft_add_len_sha(t_uint *arr, ssize_t i, size_t len)
 {
 	while (len)
 	{
@@ -70,11 +70,11 @@ void		ft_add_len_sha(t_uint *arr, int i, size_t len)
 	}
 }
 
-t_uint		*ft_msg_sha(unsigned char *str, size_t nlen, size_t len)
+t_uint		*ft_msg_sha(t_uchar *str, size_t nlen, size_t len)
 {
 	t_uint	*arr;
-	int		i;
-	int		new_len;
+	ssize_t	i;
+	ssize_t	new_len;
 
 	i = 0;
 	new_len = nlen / 4;

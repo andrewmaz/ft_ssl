@@ -6,52 +6,79 @@
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 18:54:58 by amazurok          #+#    #+#             */
-/*   Updated: 2018/05/23 13:33:03 by amazurok         ###   ########.fr       */
+/*   Updated: 2018/05/24 14:36:37 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "md5.h"
 
-void	ft_del_m(t_md5 *lst)
+size_t	ft_newlen_256(size_t len)
 {
-	int		i;
-	t_md5	*tmp;
+	size_t			len1;
 
-	i = 0;
-	while (lst && i <= D)
-	{
-		tmp = lst->next;
-		free(lst);
-		lst = tmp;
-		i++;
-	}
+	len1 = len + 1;
+	while (len1 % 512 != 448)
+		len1++;
+	len1 /= BIT;
+	len1 += LEN_BLCK_256;
+	return (len1);
+}
+
+size_t	ft_newlen_512(size_t len)
+{
+	size_t			len1;
+
+	len1 = len + 1;
+	while (len1 % 1024 != 896)
+		len1++;
+	len1 /= BIT;
+	len1 += LEN_BLCK_512;
+	return (len1);
+}
+
+void	ft_algo_mand(t_kkey *key, t_uchar *mg, size_t len, int k)
+{
+	t_uint			*msg;
+	t_md5			*m_hash;
+	t_uint			*s_hash;
+	size_t			nlen;
+
+	s_hash = NULL;
+	nlen = ft_newlen_256(len);
+	m_hash = key->md5 ? ft_new_md5() : NULL;
+	msg = key->md5 ? ft_msg_md5(mg, nlen, len) : ft_msg_sha(mg, nlen, len);
+	key->md5 ? ft_rounds_md5(m_hash, msg, nlen) : ft_rounds_sha256(msg, nlen, &s_hash);
+	key->md5 ? ft_print_res_md5(m_hash, key, k) : ft_print_res_sha(s_hash, key, k);
+	free(msg);
+	s_hash ? free(s_hash) : 0;
+	ft_del_m(m_hash);
+}
+
+void	ft_algo_bonus(t_kkey *key, t_uchar *mg, size_t len, int k)
+{
+	size_t	nlen;
+	t_ulint *msg;
+	t_ulint *hash;
+
+	nlen = ft_newlen_512(len);
+	msg = ft_msg_sha512(mg, nlen, len);
+	ft_rounds_sha512(msg, nlen, &hash);
+	ft_print_res_sha512(hash, key, k);
+	free(msg);
+	free(hash);
 }
 
 void	ft_algo(const char *str, size_t len, t_kkey *key, int k)
 {
-	size_t			len1;
+	size_t			nlen;
 	unsigned char	*mg;
-	t_uint			*msg;
-	t_md5			*m;
-	t_uint			*s;
 
-	len1 = len * BIT + 1;
-	while (len1 % 512 != 448)
-		len1++;
-	len1 /= BIT;
-	len1 += LEN_BLCK;
-	mg = (unsigned char *)malloc(sizeof(unsigned char) * (len1));
-	ft_bzero(mg, len1);
+	nlen = key->sha512 ? ft_newlen_512(len) : ft_newlen_256(len);
+	mg = (unsigned char *)malloc(sizeof(unsigned char) * (nlen));
+	ft_bzero(mg, nlen);
 	ft_memcpy(mg, str, len);
-	mg[len] = 0x80;
+	mg[len] = 0b10000000;
 	len *= BIT;
-	s = NULL;
-	m = key->md5 ? ft_new_md5() : NULL;
-	msg = key->md5 ? ft_msg_md5(mg, len1, len) : ft_msg_sha(mg, len1, len);
-	key->md5 ? ft_rounds_md5(m, msg, len1) : ft_rounds_sha256(msg, len1, &s);
-	key->md5 ? ft_print_res_md5(m, key, k) : ft_print_res_sha(s, key, k);
+	key->sha512 ? ft_algo_bonus(key, mg, len, k) : ft_algo_mand(key, mg, len, k);
 	free(mg);
-	free(msg);
-	s ? free(s) : 0;
-	ft_del_m(m);
 }
