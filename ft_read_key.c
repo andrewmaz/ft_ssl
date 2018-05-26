@@ -82,7 +82,8 @@ int		ft_read_key(int c, char **v, t_kkey *key)
 	ft_bzero_key(key);
 	while (i < c)
 	{
-		if (v[i][0] == '-' && ft_isalpha(v[i][1]))
+		if (v[i][0] == '-' && ft_isalpha(v[i][1]) && (key->sha512 || \
+			key->sha256 || key->md5))
 			i = ft_set_key(key, i, v, c);
 		else
 			i = ft_read_nonmin(key, v, i);
