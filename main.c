@@ -46,7 +46,7 @@ int		main(int c, char **v)
 	ft_read_key(c, v, &key);
 	key.h ? ft_help(&key) : 0;
 	if (!key.md5 && !key.sha256 && !key.sha512)
-		ft_help(&key);
+		ft_usage_ssl(&key, NULL);
 	if ((!key.s && !key.n_fd) || key.p)
 	{
 		line = ft_my_read(0, &key);

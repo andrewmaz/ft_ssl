@@ -35,22 +35,22 @@ void	ft_bzero_key(t_kkey *key)
 
 int		ft_set_key(t_kkey *key, int i, char **v, int c)
 {
-	if (v[i][1] == 'p')
+	if (v[i][1] == 'p' && v[i][2] == '\0')
 		key->p = 1;
-	else if (v[i][1] == 'q')
+	else if (v[i][1] == 'q' && v[i][2] == '\0')
 		key->q = 1;
-	else if (v[i][1] == 'r')
+	else if (v[i][1] == 'r' && v[i][2] == '\0')
 		key->r = 1;
-	else if (v[i][1] == 'c')
+	else if (v[i][1] == 'c' && v[i][2] == '\0')
 		key->c = 1;
-	else if (v[i][1] == 'b')
+	else if (v[i][1] == 'b' && v[i][2] == '\0')
 		key->b = 1;
-	else if (v[i][1] == 'h')
+	else if (v[i][1] == 'h' && v[i][2] == '\0')
 		key->h = 1;
-	else if (v[i][1] == 's' && (i + 1 < c))
+	else if (v[i][1] == 's' && v[i][2] == '\0' && (i + 1 < c))
 		key->s = ft_realcatendl(key->s, v[++i]);
 	else
-		ft_help(key);
+		ft_help_key(key, v[i]);
 	return (i);
 }
 
@@ -66,7 +66,7 @@ int		ft_read_nonmin(t_kkey *key, char **v, int i)
 		while (v[i])
 		{
 			if (!key->sha512 && !key->sha256 && !key->md5)
-				ft_help(key);
+				ft_usage_ssl(key, v[i]);
 			key->fd = ft_intrealloc(key->fd, key->n_fd);
 			key->fd[key->n_fd++] = open(v[i], O_RDONLY);
 			key->fn = ft_realcatendl(key->fn, v[i++]);

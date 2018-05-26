@@ -44,3 +44,36 @@ void	ft_help(t_kkey *key)
 	ft_delkey(key, 1);
 	exit(1);
 }
+
+void	ft_usage_ssl(t_kkey *key, char *str)
+{
+	if (!str)
+		ft_printf("usage: ft_ssl command [command opts] [command args]\n");
+	else
+	{
+		ft_printf("ft_ssl: Error: '%s' is an invalid command.\n\n", str);
+		ft_printf("Standard commands:\n\n");
+		ft_printf("Message Digest commands:\nmd5\nsha256\nsha512\n\n");
+		ft_printf("Cipher commands:\n\n");
+	}
+	ft_delkey(key, 1);
+	exit(1);
+}
+
+void	ft_help_key(t_kkey *key, char *str)
+{
+	ft_printf("unknown option '%s'\n", str);
+	ft_printf("options are\n");
+	ft_printf("%-10s %-s\n", "-h", "help");
+	ft_printf("%-10s %-s\n", "-p", \
+	"echo STDIN to STDOUT and append the checksum to STDOUT");
+	ft_printf("%-10s %-s\n", "-q", "quiet mode");
+	ft_printf("%-10s %-s\n", "-r", "reverse the format of the output");
+	ft_printf("%-10s %-s\n", "-s \"line\"", \
+	"print the sum of the given string");
+	ft_printf("%-10s %-s\n", "-b", "output in binary form");
+	ft_printf("%-10s %-s\n", "-c", \
+	"to output the digest with separating colons");
+	ft_delkey(key, 1);
+	exit(1);
+}

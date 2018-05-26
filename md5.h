@@ -91,5 +91,7 @@ void			ft_rounds_sha512(t_ulint *msg, size_t	nlen, t_ulint **hash);
 t_ulint			*ft_create_buf512(void);
 t_ulint			*ft_gen_addwords512(t_ulint *msg);
 void			ft_print_res_sha512(t_ulint *hash, t_kkey *key, int k);
+void			ft_usage_ssl(t_kkey *key, char *str);
+void			ft_help_key(t_kkey *key, char *str);
 
 #endif
