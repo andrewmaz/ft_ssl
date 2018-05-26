@@ -6,11 +6,9 @@
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 13:51:43 by amazurok          #+#    #+#             */
-/*   Updated: 2018/05/24 15:54:24 by amazurok         ###   ########.fr       */
+/*   Updated: 2018/05/26 11:15:41 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-//ft_rounds_sha512(msg, nlen, &hash);
 
 #include "md5.h"
 
@@ -22,7 +20,7 @@ t_ulint		ft_rotr5(t_ulint x, int s)
 	return (res);
 }
 
-t_ulint	ft_const_table_h(int i)
+t_ulint		ft_const_table_h(int i)
 {
 	const t_ulint k[] = {0xa2bfe8a14cf10364,\
 	0xa81a664bbc423001, 0xc24b8b70d0f89791, 0xc76c51a30654be30,\
@@ -38,10 +36,11 @@ t_ulint	ft_const_table_h(int i)
 	0x1b710b35131c471b, 0x28db77f523047d84, 0x32caab7b40c72493,\
 	0x3c9ebe0a15c9bebc, 0x431d67c49c100d4c, 0x4cc5d4becb3e42b6,\
 	0x597f299cfc657e2a, 0x5fcb6fab3ad6faec, 0x6c44198c4a475817};
+
 	return (k[i]);
 }
 
-t_ulint	ft_const_table512(int i)
+t_ulint		ft_const_table512(int i)
 {
 	const t_ulint k[] = {0x428a2f98d728ae22, 0x7137449123ef65cd,
 	0xb5c0fbcfec4d3b2f, 0xe9b5dba58189dbbc, 0x3956c25bf348b538,
@@ -57,10 +56,11 @@ t_ulint	ft_const_table512(int i)
 	0x27b70a8546d22ffc, 0x2e1b21385c26c926, 0x4d2c6dfc5ac42aed,\
 	0x53380d139d95b3df, 0x650a73548baf63de, 0x766a0abb3c77b2a8,\
 	0x81c2c92e47edaee6, 0x92722c851482353b, };
+
 	return (i < 40 ? k[i] : ft_const_table_h(i - 40));
 }
 
-void	ft_in_rounds_sha512(t_ulint *bf, t_ulint *msg, int b)
+void		ft_in_rounds_sha512(t_ulint *bf, t_ulint *msg, int b)
 {
 	int		j;
 	t_ulint	t[6];
@@ -76,7 +76,6 @@ void	ft_in_rounds_sha512(t_ulint *bf, t_ulint *msg, int b)
 		t[3] = ft_rotr5(bf[E], 14) ^ ft_rotr5(bf[E], 18) ^ ft_rotr5(bf[E], 41);
 		t[4] = (bf[E] & bf[F]) ^ ((~bf[E]) & bf[G]);
 		t[T1] = bf[H] + t[3] + t[4] + ft_const_table512(j) + nmsg[j];
-
 		bf[H] = bf[G];
 		bf[G] = bf[F];
 		bf[F] = bf[E];
@@ -87,35 +86,10 @@ void	ft_in_rounds_sha512(t_ulint *bf, t_ulint *msg, int b)
 		bf[A] = t[T1] + t[T2];
 		j++;
 	}
-
 	free(nmsg);
 }
 
-void	ft_set_v5(t_ulint *des, t_ulint *src)
-{
-	int i;
-
-	i = 0;
-	while (i < 8)
-	{
-		des[i] = src[i];
-		i++;
-	}
-}
-
-void	ft_add_v5(t_ulint *des, t_ulint *src)
-{
-	int i;
-
-	i = 0;
-	while (i < 8)
-	{
-		des[i] += src[i];
-		i++;
-	}
-}
-
-void	ft_rounds_sha512(t_ulint *msg, size_t nlen, t_ulint **hash)
+void		ft_rounds_sha512(t_ulint *msg, size_t nlen, t_ulint **hash)
 {
 	size_t	i;
 	t_ulint	*bf;

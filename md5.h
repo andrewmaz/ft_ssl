@@ -6,7 +6,7 @@
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 17:00:28 by amazurok          #+#    #+#             */
-/*   Updated: 2018/05/24 15:35:27 by amazurok         ###   ########.fr       */
+/*   Updated: 2018/05/26 14:29:58 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,9 @@
 # define T2 2
 
 # include "./libftprintf/libft/libft.h"
-# include <fcntl.h>
-#include "stdio.h"
-#include <inttypes.h>
 
-typedef unsigned int	t_uint;
-typedef unsigned char	t_uchar;
+typedef unsigned int		t_uint;
+typedef unsigned char		t_uchar;
 typedef unsigned long int	t_ulint;
 
 typedef struct	s_md5
@@ -48,11 +45,14 @@ typedef struct	s_md5
 typedef struct	s_kkey
 {
 	int		md5;
-  int		sha256;
-  int		sha512;
+	int		sha256;
+	int		sha512;
 	int		p;
 	int		q;
 	int		r;
+	int		b;
+	int		c;
+	int		h;
 	char	*s;
 	char	**ns;
 	int		is;
@@ -63,8 +63,10 @@ typedef struct	s_kkey
 	int		n_fd;
 }				t_kkey;
 
-t_uint		ft_rotr(t_uint x, int s);
-t_ulint		ft_rotr5(t_ulint x, int s);
+t_uint			ft_rotr(t_uint x, int s);
+t_ulint			ft_rotr5(t_ulint x, int s);
+void			ft_set_v5(t_ulint *des, t_ulint *src);
+void			ft_add_v5(t_ulint *des, t_ulint *src);
 t_md5			*ft_new_md5(void);
 t_uint			f_f(t_uint x, t_uint y, t_uint z);
 t_uint			f_g(t_uint x, t_uint y, t_uint z);
@@ -89,6 +91,5 @@ void			ft_rounds_sha512(t_ulint *msg, size_t	nlen, t_ulint **hash);
 t_ulint			*ft_create_buf512(void);
 t_ulint			*ft_gen_addwords512(t_ulint *msg);
 void			ft_print_res_sha512(t_ulint *hash, t_kkey *key, int k);
-
 
 #endif

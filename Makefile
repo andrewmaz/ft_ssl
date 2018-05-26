@@ -12,8 +12,9 @@
 
 NAME = ft_ssl
 
-SRC = ft_char2int.c ft_md5.c ft_new.c ft_print.c ft_read_key.c ft_rounds_md5.c \
-		ft_rounds_sha.c ft_sha256.c ft_start_algo.c main.c ft_help.c
+SRC = ft_char2int.c ft_del.c ft_help.c ft_md5.c ft_new.c ft_print.c ft_read_key.c \
+		ft_rounds_md5.c ft_rounds_sha.c ft_rounds_sha512.c ft_sha256.c ft_sha512.c \
+		ft_start_algo.c main.c
 
 MLIB = make -C libftprintf
 

@@ -6,7 +6,7 @@
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 11:33:42 by amazurok          #+#    #+#             */
-/*   Updated: 2018/05/24 11:24:40 by amazurok         ###   ########.fr       */
+/*   Updated: 2018/05/26 12:48:04 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@ void	ft_bzero_key(t_kkey *key)
 	key->p = 0;
 	key->q = 0;
 	key->r = 0;
+	key->c = 0;
+	key->b = 0;
+	key->h = 0;
 	key->s = NULL;
 	key->ns = NULL;
 	key->is = 0;
@@ -38,6 +41,12 @@ int		ft_set_key(t_kkey *key, int i, char **v, int c)
 		key->q = 1;
 	else if (v[i][1] == 'r')
 		key->r = 1;
+	else if (v[i][1] == 'c')
+		key->c = 1;
+	else if (v[i][1] == 'b')
+		key->b = 1;
+	else if (v[i][1] == 'h')
+		key->h = 1;
 	else if (v[i][1] == 's' && (i + 1 < c))
 		key->s = ft_realcatendl(key->s, v[++i]);
 	else

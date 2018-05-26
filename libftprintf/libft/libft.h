@@ -17,6 +17,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <inttypes.h>
+# include <fcntl.h>
 # define BUFF_SIZE 1000000
 
 ssize_t				ft_atoi(const char *str);

@@ -6,15 +6,39 @@
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 11:53:34 by amazurok          #+#    #+#             */
-/*   Updated: 2018/05/24 14:12:01 by amazurok         ###   ########.fr       */
+/*   Updated: 2018/05/26 11:16:16 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "md5.h"
 
+void		ft_set_v5(t_ulint *des, t_ulint *src)
+{
+	int i;
+
+	i = 0;
+	while (i < 8)
+	{
+		des[i] = src[i];
+		i++;
+	}
+}
+
+void		ft_add_v5(t_ulint *des, t_ulint *src)
+{
+	int i;
+
+	i = 0;
+	while (i < 8)
+	{
+		des[i] += src[i];
+		i++;
+	}
+}
+
 void		ft_add_len_sha512(t_ulint *arr, ssize_t i, size_t len)
 {
-		arr[i] = arr[i] | len;
+	arr[i] = arr[i] | len;
 }
 
 t_ulint		*ft_msg_sha512(t_uchar *mg, size_t nlen, size_t len)
@@ -23,7 +47,7 @@ t_ulint		*ft_msg_sha512(t_uchar *mg, size_t nlen, size_t len)
 	ssize_t	i;
 	ssize_t	new_len;
 	t_ulint a;
-	int 	k;
+	int		k;
 
 	i = 0;
 	new_len = nlen / 8;
@@ -45,4 +69,3 @@ t_ulint		*ft_msg_sha512(t_uchar *mg, size_t nlen, size_t len)
 	ft_add_len_sha512(arr, i, len);
 	return (arr);
 }
-//ft_print_res_sha512(hash, key, k);
