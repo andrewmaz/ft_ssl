@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "md5.h"
+#include "ft_ssl.h"
 
 void		ft_add_len_md5(t_uint *arr, int i, size_t len)
 {

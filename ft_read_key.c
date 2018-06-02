@@ -6,19 +6,17 @@
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 11:33:42 by amazurok          #+#    #+#             */
-/*   Updated: 2018/05/26 12:48:04 by amazurok         ###   ########.fr       */
+/*   Updated: 2018/06/02 17:00:56 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "md5.h"
+#include "ft_ssl.h"
 
 void	ft_bzero_key(t_kkey *key)
 {
 	key->p = 0;
 	key->q = 0;
 	key->r = 0;
-	key->c = 0;
-	key->b = 0;
 	key->h = 0;
 	key->s = NULL;
 	key->ns = NULL;
@@ -29,7 +27,9 @@ void	ft_bzero_key(t_kkey *key)
 	key->ifn = 0;
 	key->n_fd = 0;
 	key->md5 = 0;
+	key->sha224 = 0;
 	key->sha256 = 0;
+	key->sha384 = 0;
 	key->sha512 = 0;
 }
 
@@ -41,10 +41,6 @@ int		ft_set_key(t_kkey *key, int i, char **v, int c)
 		key->q = 1;
 	else if (v[i][1] == 'r' && v[i][2] == '\0')
 		key->r = 1;
-	else if (v[i][1] == 'c' && v[i][2] == '\0')
-		key->c = 1;
-	else if (v[i][1] == 'b' && v[i][2] == '\0')
-		key->b = 1;
 	else if (v[i][1] == 'h' && v[i][2] == '\0')
 		key->h = 1;
 	else if (v[i][1] == 's' && v[i][2] == '\0' && (i + 1 < c))
@@ -60,12 +56,17 @@ int		ft_read_nonmin(t_kkey *key, char **v, int i)
 		key->md5 = 1;
 	else if (ft_strequ(v[i], "sha256") && !key->md5)
 		key->sha256 = 1;
+	else if (ft_strequ(v[i], "sha224") && !key->md5)
+		key->sha224 = 1;
 	else if (ft_strequ(v[i], "sha512") && !key->md5)
 		key->sha512 = 1;
+	else if (ft_strequ(v[i], "sha384") && !key->md5)
+		key->sha384 = 1;
 	else
 		while (v[i])
 		{
-			if (!key->sha512 && !key->sha256 && !key->md5)
+			if (!key->sha512 && !key->sha256 && !key->md5 && !key->sha224 \
+					&& !key->sha384)
 				ft_usage_ssl(key, v[i]);
 			key->fd = ft_intrealloc(key->fd, key->n_fd);
 			key->fd[key->n_fd++] = open(v[i], O_RDONLY);
@@ -83,7 +84,7 @@ int		ft_read_key(int c, char **v, t_kkey *key)
 	while (i < c)
 	{
 		if (v[i][0] == '-' && ft_isalpha(v[i][1]) && (key->sha512 || \
-			key->sha256 || key->md5))
+			key->sha256 || key->md5 || key->sha224 || key->sha384))
 			i = ft_set_key(key, i, v, c);
 		else
 			i = ft_read_nonmin(key, v, i);

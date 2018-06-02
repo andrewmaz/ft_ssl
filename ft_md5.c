@@ -6,13 +6,13 @@
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 16:22:23 by amazurok          #+#    #+#             */
-/*   Updated: 2018/05/23 15:02:52 by amazurok         ###   ########.fr       */
+/*   Updated: 2018/06/02 19:13:53 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "md5.h"
+#include "ft_ssl.h"
 
-unsigned int	*ft_to_arr(unsigned int a, unsigned int b, unsigned int c)
+t_uint			*ft_to_arr(unsigned int a, unsigned int b, unsigned int c)
 {
 	unsigned int *res;
 
@@ -25,27 +25,23 @@ unsigned int	*ft_to_arr(unsigned int a, unsigned int b, unsigned int c)
 
 void			ft_in_md5(t_md5 *a, unsigned int *msg, const unsigned int *s)
 {
-	unsigned int r[4];
+	unsigned int	r;
+	static func		qwe[64] = {f_f, f_f, f_f, f_f, f_f, f_f, f_f, f_f, f_f, \
+		f_f, f_f, f_f, f_f, f_f, f_f, f_f, f_g, f_g, f_g, f_g, f_g, f_g, f_g, \
+		f_g, f_g, f_g, f_g, f_g, f_g, f_g, f_g, f_g, f_h, f_h, f_h, f_h, f_h, \
+		f_h, f_h, f_h, f_h, f_h, f_h, f_h, f_h, f_h, f_h, f_h, f_i, f_i, f_i, \
+		f_i, f_i, f_i, f_i, f_i, f_i, f_i, f_i, f_i, f_i, f_i, f_i, f_i};
+	static t_uint	ar[64] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,\
+		15, 1, 6, 11, 0, 5, 10, 15, 4, 9, 14, 3, 8, 13, 2, 7, 12, 5, 8, 11, 14,\
+		1, 4, 7, 10, 13, 0, 3, 6, 9, 12, 15, 2, 0, 7, 14, 5, 12, 3, 10, 1, 8,\
+		15, 6, 13, 4, 11, 2, 9};
 
-	r[0] = 0;
-	r[1] = 1;
-	r[2] = 5;
-	r[3] = 0;
-	while (r[0] < 64)
+	r = 0;
+	while (r < 64)
 	{
-		if (r[0] < 16)
-			ft_r(a, ft_to_arr(msg[r[0]], s[r[0]], r[0]), &f_f);
-		else if (r[0] < 32)
-			ft_r(a, ft_to_arr(msg[r[1]], s[r[0]], r[0]), &f_g);
-		else if (r[0] < 48)
-			ft_r(a, ft_to_arr(msg[r[2]], s[r[0]], r[0]), &f_h);
-		else if (r[0] < 64)
-			ft_r(a, ft_to_arr(msg[r[3]], s[r[0]], r[0]), &f_i);
+		ft_r(a, ft_to_arr(msg[ar[r]], s[r], r), qwe[r]);
 		a = a->prev;
-		r[1] = r[0] >= 16 && r[0] < 32 ? (r[1] + 5) % 16 : r[1];
-		r[2] = r[0] >= 32 && r[0] < 48 ? (r[2] + 3) % 16 : r[2];
-		r[3] = r[0] >= 48 && r[0] < 64 ? (r[3] + 7) % 16 : r[3];
-		r[0]++;
+		r++;
 	}
 }
 

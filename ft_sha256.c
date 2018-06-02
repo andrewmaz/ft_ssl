@@ -6,11 +6,11 @@
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 18:07:05 by amazurok          #+#    #+#             */
-/*   Updated: 2018/05/24 15:29:46 by amazurok         ###   ########.fr       */
+/*   Updated: 2018/06/02 16:11:19 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "md5.h"
+#include "ft_ssl.h"
 
 void	ft_set_v(t_uint *des, t_uint *src)
 {
@@ -84,7 +84,7 @@ void	ft_in_rounds_sha(t_uint *bf, t_uint *msg, int b)
 	free(nmsg);
 }
 
-void	ft_rounds_sha256(t_uint *msg, size_t len, t_uint **in)
+void	ft_rounds_sha256(t_kkey *key, t_uint *msg, size_t len, t_uint **in)
 {
 	size_t	i;
 	t_uint	*bf;
@@ -93,8 +93,8 @@ void	ft_rounds_sha256(t_uint *msg, size_t len, t_uint **in)
 
 	b = 0;
 	i = 0;
-	bf = ft_create_buf();
-	bn = ft_create_buf();
+	bf = key->sha256 ? ft_create_buf() : ft_create_buf224();
+	bn = key->sha256 ? ft_create_buf() : ft_create_buf224();
 	while (i < len)
 	{
 		ft_set_v(bf, bn);

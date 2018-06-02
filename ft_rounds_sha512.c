@@ -6,11 +6,11 @@
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 13:51:43 by amazurok          #+#    #+#             */
-/*   Updated: 2018/05/26 11:15:41 by amazurok         ###   ########.fr       */
+/*   Updated: 2018/06/02 16:33:52 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "md5.h"
+#include "ft_ssl.h"
 
 t_ulint		ft_rotr5(t_ulint x, int s)
 {
@@ -89,7 +89,7 @@ void		ft_in_rounds_sha512(t_ulint *bf, t_ulint *msg, int b)
 	free(nmsg);
 }
 
-void		ft_rounds_sha512(t_ulint *msg, size_t nlen, t_ulint **hash)
+void		ft_rounds_sha512(t_kkey *key, t_ulint *msg, size_t nln, t_ulint **h)
 {
 	size_t	i;
 	t_ulint	*bf;
@@ -98,9 +98,9 @@ void		ft_rounds_sha512(t_ulint *msg, size_t nlen, t_ulint **hash)
 
 	b = 0;
 	i = 0;
-	bf = ft_create_buf512();
-	bn = ft_create_buf512();
-	while (i < nlen)
+	bf = key->sha512 ? ft_create_buf512() : ft_create_buf384();
+	bn = key->sha512 ? ft_create_buf512() : ft_create_buf384();
+	while (i < nln)
 	{
 		ft_set_v5(bf, bn);
 		ft_in_rounds_sha512(bf, msg, b);
@@ -109,5 +109,5 @@ void		ft_rounds_sha512(t_ulint *msg, size_t nlen, t_ulint **hash)
 		i += 128;
 	}
 	free(bf);
-	*hash = bn;
+	*h = bn;
 }
