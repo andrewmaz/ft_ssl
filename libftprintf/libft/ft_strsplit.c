@@ -21,7 +21,7 @@ int			ft_num_word(const char *s, char c)
 	res = 0;
 	while (s && s[i])
 	{
-		if (ft_isprint(s[i]) && s[i] != c && (s[i + 1] == c || !s[i + 1]))
+		if (s[i] != c && (s[i + 1] == c || !s[i + 1]))
 			res++;
 		i++;
 	}

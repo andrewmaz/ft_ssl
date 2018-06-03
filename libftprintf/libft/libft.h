@@ -6,7 +6,7 @@
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/27 11:26:01 by amazurok          #+#    #+#             */
-/*   Updated: 2018/05/12 12:01:46 by amazurok         ###   ########.fr       */
+/*   Updated: 2018/06/03 17:25:59 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <stdlib.h>
 # include <inttypes.h>
 # include <fcntl.h>
-# define BUFF_SIZE 1000000
+# define BUFF_SIZE 10000
 
 ssize_t				ft_atoi(const char *str);
 void				ft_bzero(void *s, size_t n);
@@ -99,10 +99,12 @@ int					ft_len_word(const char *s, char c);
 int					get_next_line(const int fd, char **line);
 int					ft_printf(const char *format, ...);
 
+size_t				ft_dstrlen(char **str);
 void				ft_dstrdel(char ***dstr);
 int					*ft_intrealloc(int *arr, int oldsize);
 char				*ft_realcat(char *input, char *str);
 char				*ft_realcatendl(char *old, char *str);
+char				*ft_realcatendl_s(char *input, char *str, char s);
 void				ft_set_val(int *a, int *b, int an, int bn);
 
 #endif

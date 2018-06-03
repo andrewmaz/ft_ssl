@@ -6,11 +6,32 @@
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/20 17:28:50 by amazurok          #+#    #+#             */
-/*   Updated: 2018/06/02 16:31:18 by amazurok         ###   ########.fr       */
+/*   Updated: 2018/06/03 17:33:10 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ssl.h"
+
+void		ft_bzero_key(t_kkey *key)
+{
+	key->p = 0;
+	key->q = 0;
+	key->r = 0;
+	key->h = 0;
+	key->s = NULL;
+	key->ns = NULL;
+	key->is = 0;
+	key->fd = NULL;
+	key->fn = NULL;
+	key->nfn = NULL;
+	key->ifn = 0;
+	key->n_fd = 0;
+	key->md5 = 0;
+	key->sha224 = 0;
+	key->sha256 = 0;
+	key->sha384 = 0;
+	key->sha512 = 0;
+}
 
 t_md5		*ft_new_const(void)
 {

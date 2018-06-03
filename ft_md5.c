@@ -6,7 +6,7 @@
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 16:22:23 by amazurok          #+#    #+#             */
-/*   Updated: 2018/06/02 19:13:53 by amazurok         ###   ########.fr       */
+/*   Updated: 2018/06/03 17:48:31 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_uint			*ft_to_arr(unsigned int a, unsigned int b, unsigned int c)
 void			ft_in_md5(t_md5 *a, unsigned int *msg, const unsigned int *s)
 {
 	unsigned int	r;
-	static func		qwe[64] = {f_f, f_f, f_f, f_f, f_f, f_f, f_f, f_f, f_f, \
+	static t_func	qwe[64] = {f_f, f_f, f_f, f_f, f_f, f_f, f_f, f_f, f_f, \
 		f_f, f_f, f_f, f_f, f_f, f_f, f_f, f_g, f_g, f_g, f_g, f_g, f_g, f_g, \
 		f_g, f_g, f_g, f_g, f_g, f_g, f_g, f_g, f_g, f_h, f_h, f_h, f_h, f_h, \
 		f_h, f_h, f_h, f_h, f_h, f_h, f_h, f_h, f_h, f_h, f_h, f_i, f_i, f_i, \

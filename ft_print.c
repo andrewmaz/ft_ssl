@@ -61,10 +61,7 @@ void	ft_print_res_sha(t_uint *hash, t_kkey *key, int k)
 		key->ns[key->is]) : ft_printf("%s) = ", key->nfn[key->ifn]);
 	}
 	while (i < (key->sha256 ? 8 : 7))
-	{
-		ft_printf("%.8x", hash[i]);
-		i++;
-	}
+		ft_printf("%.8x", hash[i++]);
 	if (k && !key->q && key->r)
 	{
 		key->is < ft_num_word(key->s, '\n') ? ft_printf(" \"%s\"", \
@@ -82,15 +79,12 @@ void	ft_print_res_sha512(t_ulint *hash, t_kkey *key, int k)
 	i = 0;
 	if (k && !key->q && !key->r)
 	{
-		key->sha512 ? ft_printf("SHA512 (") : ft_printf("SHA284 (");
+		key->sha512 ? ft_printf("SHA512 (") : ft_printf("SHA384 (");
 		key->is < ft_num_word(key->s, '\n') ? ft_printf("\"%s\") = ", \
 		key->ns[key->is]) : ft_printf("%s) = ", key->nfn[key->ifn]);
 	}
 	while (i < (key->sha512 ? 8 : 6))
-	{
-		ft_printf("%z.16x", hash[i]);
-		i++;
-	}
+		ft_printf("%z.16x", hash[i++]);
 	if (k && !key->q && key->r)
 	{
 		key->is < ft_num_word(key->s, '\n') ? ft_printf(" \"%s\"", \

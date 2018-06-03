@@ -6,7 +6,7 @@
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 16:54:31 by amazurok          #+#    #+#             */
-/*   Updated: 2018/06/02 17:07:14 by amazurok         ###   ########.fr       */
+/*   Updated: 2018/06/03 17:14:34 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ int		main(int c, char **v)
 		key.p ? ft_printf("%s", line) : 0;
 		line ? ft_algo(line, ft_strlen(line), &key, 0) : 0;
 	}
-	while (key.is < ft_num_word(key.s, '\n') || i < key.n_fd)
+	while (key.is < ft_num_word(key.s, 1) || i < key.n_fd)
 	{
-		line = (key.is < ft_num_word(key.s, '\n')) ? key.ns[key.is] : \
+		line = (key.is < ft_num_word(key.s, 1)) ? key.ns[key.is] : \
 				ft_my_read(key.fd[i++], &key);
 		len = ft_strlen(line);
 		line ? ft_algo(line, len, &key, 1) : 0;
