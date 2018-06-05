@@ -6,14 +6,31 @@
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/20 17:28:50 by amazurok          #+#    #+#             */
-/*   Updated: 2018/06/03 17:33:10 by amazurok         ###   ########.fr       */
+/*   Updated: 2018/06/05 13:51:46 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ssl.h"
 
+t_algo		*ft_newalgo(void)
+{
+	t_algo *algo;
+
+	algo = (t_algo*)malloc(sizeof(t_algo));
+	algo->name = NULL;
+	algo->alg = NULL;
+	algo->cr_lbuf = NULL;
+	algo->cr_buf = NULL;
+	algo->len = NULL;
+	algo->next = NULL;
+	algo->prev = NULL;
+	algo->word = 0;
+	return (algo);
+}
+
 void		ft_bzero_key(t_kkey *key)
 {
+	key->al = 0;
 	key->p = 0;
 	key->q = 0;
 	key->r = 0;
@@ -26,11 +43,7 @@ void		ft_bzero_key(t_kkey *key)
 	key->nfn = NULL;
 	key->ifn = 0;
 	key->n_fd = 0;
-	key->md5 = 0;
-	key->sha224 = 0;
-	key->sha256 = 0;
-	key->sha384 = 0;
-	key->sha512 = 0;
+	key->alg = ft_add_algo();
 }
 
 t_md5		*ft_new_const(void)

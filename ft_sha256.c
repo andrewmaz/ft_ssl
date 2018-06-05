@@ -6,7 +6,7 @@
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 18:07:05 by amazurok          #+#    #+#             */
-/*   Updated: 2018/06/02 16:11:19 by amazurok         ###   ########.fr       */
+/*   Updated: 2018/06/05 12:30:55 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,8 @@ void	ft_rounds_sha256(t_kkey *key, t_uint *msg, size_t len, t_uint **in)
 
 	b = 0;
 	i = 0;
-	bf = key->sha256 ? ft_create_buf() : ft_create_buf224();
-	bn = key->sha256 ? ft_create_buf() : ft_create_buf224();
+	bf = key->alg->cr_buf();
+	bn = key->alg->cr_buf();
 	while (i < len)
 	{
 		ft_set_v(bf, bn);

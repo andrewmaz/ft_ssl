@@ -6,7 +6,7 @@
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 11:33:42 by amazurok          #+#    #+#             */
-/*   Updated: 2018/06/03 17:27:38 by amazurok         ###   ########.fr       */
+/*   Updated: 2018/06/05 13:41:02 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,21 +31,17 @@ int		ft_set_key(t_kkey *key, int i, char **v, int c)
 
 int		ft_read_nonmin(t_kkey *key, char **v, int i)
 {
-	if (ft_strequ(v[i], "md5") && !key->sha256)
-		key->md5 = 1;
-	else if (ft_strequ(v[i], "sha256") && !key->md5)
-		key->sha256 = 1;
-	else if (ft_strequ(v[i], "sha224") && !key->md5)
-		key->sha224 = 1;
-	else if (ft_strequ(v[i], "sha512") && !key->md5)
-		key->sha512 = 1;
-	else if (ft_strequ(v[i], "sha384") && !key->md5)
-		key->sha384 = 1;
+	while (!key->al && !ft_strequ(v[i], key->alg->name) && key->alg->next)
+		key->alg = key->alg->next;
+	if (ft_strequ(v[i], key->alg->name))
+	{
+		key->al = 1;
+		return (i);
+	}
 	else
 		while (v[i])
 		{
-			if (!key->sha512 && !key->sha256 && !key->md5 && !key->sha224 \
-					&& !key->sha384)
+			if (!key->al)
 				ft_usage_ssl(key, v[i]);
 			key->fd = ft_intrealloc(key->fd, key->n_fd);
 			key->fd[key->n_fd++] = open(v[i], O_RDONLY);
@@ -111,18 +107,17 @@ char	**ft_read_sdtin(void)
 
 int		ft_read_key(int c, char **v, t_kkey *key)
 {
-	int i;
-	int stdin;
+	int		i;
+	int		stdin;
 
 	stdin = c == 1;
 	i = c == 1 ? 0 : 1;
 	ft_bzero_key(key);
 	v = c == 1 ? ft_read_sdtin() : v;
-	c = (int)(c == 1 ? ft_dstrlen(v) : c);
+	c = (c == 1 ? (int)ft_dstrlen(v) : c);
 	while (i < c)
 	{
-		if (v[i][0] == '-' && ft_isalpha(v[i][1]) && (key->sha512 || \
-			key->sha256 || key->md5 || key->sha224 || key->sha384))
+		if (v[i][0] == '-' && ft_isalpha(v[i][1]) && key->al)
 			i = ft_set_key(key, i, v, c);
 		else
 			i = ft_read_nonmin(key, v, i);

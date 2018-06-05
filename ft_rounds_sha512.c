@@ -6,7 +6,7 @@
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 13:51:43 by amazurok          #+#    #+#             */
-/*   Updated: 2018/06/02 16:33:52 by amazurok         ###   ########.fr       */
+/*   Updated: 2018/06/05 12:30:55 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,8 @@ void		ft_rounds_sha512(t_kkey *key, t_ulint *msg, size_t nln, t_ulint **h)
 
 	b = 0;
 	i = 0;
-	bf = key->sha512 ? ft_create_buf512() : ft_create_buf384();
-	bn = key->sha512 ? ft_create_buf512() : ft_create_buf384();
+	bf = key->alg->cr_lbuf();
+	bn = key->alg->cr_lbuf();
 	while (i < nln)
 	{
 		ft_set_v5(bf, bn);

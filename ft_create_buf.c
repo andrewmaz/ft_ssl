@@ -12,7 +12,7 @@
 
 #include "ft_ssl.h"
 
-t_uint		*ft_create_buf(void)
+t_uint		*ft_create_buf256(void)
 {
 	t_uint	*buf;
 

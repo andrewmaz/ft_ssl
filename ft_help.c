@@ -6,19 +6,20 @@
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/23 15:42:41 by amazurok          #+#    #+#             */
-/*   Updated: 2018/06/03 17:16:19 by amazurok         ###   ########.fr       */
+/*   Updated: 2018/06/05 13:47:44 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ssl.h"
 
-void	ft_delkey(t_kkey *key, int k)
+void	ft_pint_name_c(t_algo *alg, char c)
 {
-	ft_dstrdel(&key->nfn);
-	k ? ft_dstrdel(&key->ns) : free(key->ns);
-	ft_strdel(&key->s);
-	ft_strdel(&key->fn);
-	key->fd ? free(key->fd) : 0;
+	alg = ft_go2head(alg);
+	while (alg)
+	{
+		ft_printf("%s%c", alg->name, c);
+		alg = alg->next;
+	}
 }
 
 void	ft_help(t_kkey *key)
@@ -28,7 +29,7 @@ void	ft_help(t_kkey *key)
 	s = "____________________________________";
 	ft_printf("%sHELP%s\n", s, s);
 	ft_printf("| {red}%-73s{eoc}|\n", \
-	"usage: ./ft_ssl [md5/sha224/sha256/sha384/sha512] [keys]");
+	"usage: ./ft_ssl [command opts] [keys]");
 	ft_printf("| %-14s %-58s|\n", "", "Keys:");
 	ft_printf("| %-14s %-58s|\n", "-h", "<help>");
 	ft_printf("| %-14s %-58s|\n", "-p", \
@@ -48,11 +49,11 @@ void	ft_usage_ssl(t_kkey *key, char *str)
 		ft_printf("usage: ft_ssl command [command opts] [command args]\n");
 	else
 	{
-		ft_printf("ft_ssl: Error: '%s' is an invalid command.\n\n", str);
-		ft_printf("Standard commands:\n\n");
-		ft_printf("Message Digest commands:\n");
-		ft_printf("md5\nsha224\nsha256\nsha384\nsha512\n\n");
-		ft_printf("Cipher commands:\n\n");
+		ft_printf("ft_ssl: Error: '%s' is an invalid command.\n", str);
+		ft_printf("\nStandard commands:\n");
+		ft_printf("\nMessage Digest commands:\n");
+		ft_pint_name_c(key->alg, '\n');
+		ft_printf("\nCipher commands:\n\n");
 	}
 	ft_delkey(key, 1);
 	exit(1);

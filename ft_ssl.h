@@ -6,7 +6,7 @@
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 17:00:28 by amazurok          #+#    #+#             */
-/*   Updated: 2018/06/03 17:47:07 by amazurok         ###   ########.fr       */
+/*   Updated: 2018/06/05 14:41:55 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,15 @@
 
 # include "./libftprintf/libft/libft.h"
 
+struct s_kkey;
 typedef unsigned int		t_uint;
 typedef unsigned char		t_uchar;
 typedef unsigned long int	t_ulint;
 typedef t_uint	(*t_func)(t_uint, t_uint, t_uint);
+typedef size_t	(*t_len)(size_t);
+typedef t_uint	*(*t_buf)(void);
+typedef t_ulint	*(*t_lbuf)(void);
+typedef void	(*t_alg)(struct s_kkey*, t_uchar*, size_t, int);
 
 typedef struct	s_md5
 {
@@ -43,26 +48,37 @@ typedef struct	s_md5
 	struct s_md5	*prev;
 }				t_md5;
 
+typedef struct	s_algo
+{
+	char			*name;
+	t_alg			alg;
+	t_buf			cr_buf;
+	t_lbuf			cr_lbuf;
+	t_len			len;
+	int				word;
+	struct s_algo	*next;
+	struct s_algo	*prev;
+}				t_algo;
+
 typedef struct	s_kkey
 {
-	int		md5;
-	int		sha224;
-	int		sha256;
-	int		sha384;
-	int		sha512;
-	int		p;
-	int		q;
-	int		r;
-	int		h;
-	char	*s;
-	char	**ns;
-	int		is;
-	int		*fd;
-	char	*fn;
-	char	**nfn;
-	int		ifn;
-	int		n_fd;
+	t_algo			*alg;
+	int				al;
+	int				p;
+	int				q;
+	int				r;
+	int				h;
+	char			*s;
+	char			**ns;
+	int				is;
+	int				*fd;
+	char			*fn;
+	char			**nfn;
+	int				ifn;
+	int				n_fd;
 }				t_kkey;
+
+typedef	void	(*t_cr_alg)(t_algo*);
 
 void			ft_bzero_key(t_kkey *key);
 t_uint			ft_rotr(t_uint x, int s);
@@ -93,11 +109,28 @@ void			ft_algo(const char *str, size_t len, t_kkey *key, int k);
 void			ft_help(t_kkey *key);
 void			ft_delkey(t_kkey *key, int k);
 void			ft_del_m(t_md5 *lst);
-t_uint			*ft_create_buf(void);
+t_uint			*ft_create_buf256(void);
 t_uint			*ft_create_buf224(void);
 t_ulint			*ft_create_buf384(void);
 t_ulint			*ft_create_buf512(void);
 void			ft_usage_ssl(t_kkey *key, char *str);
 void			ft_help_key(t_kkey *key, char *str);
+
+void			ft_md5(t_kkey *key, t_uchar *mg, size_t len, int k);
+void			ft_sha256_224(t_kkey *key, t_uchar *mg, size_t len, int k);
+void			ft_sha512_384(t_kkey *key, t_uchar *mg, size_t len, int k);
+
+size_t			ft_newlen_256(size_t len);
+size_t			ft_newlen_512(size_t len);
+t_algo			*ft_newalgo(void);
+t_algo			*ft_add_algo(void);
+
+void			ft_create_md5(t_algo *alg);
+void			ft_create_sha224(t_algo *alg);
+void			ft_create_sha256(t_algo *alg);
+void			ft_create_sha384(t_algo *alg);
+void			ft_create_sha512(t_algo *alg);
+t_algo			*ft_go2head(t_algo *alg);
+void			ft_pint_name_c(t_algo *alg, char c);
 
 #endif

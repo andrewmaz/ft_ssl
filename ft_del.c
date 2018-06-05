@@ -26,3 +26,26 @@ void	ft_del_m(t_md5 *lst)
 		i++;
 	}
 }
+
+void	ft_del_algo(t_algo *algo)
+{
+	t_algo *tmp;
+
+	algo = ft_go2head(algo);
+	while (algo)
+	{
+		tmp = algo->next;
+		free(algo);
+		algo = tmp;
+	}
+}
+
+void	ft_delkey(t_kkey *key, int k)
+{
+	ft_dstrdel(&key->nfn);
+	k ? ft_dstrdel(&key->ns) : free(key->ns);
+	ft_strdel(&key->s);
+	ft_strdel(&key->fn);
+	key->fd ? free(key->fd) : 0;
+	ft_del_algo(key->alg);
+}

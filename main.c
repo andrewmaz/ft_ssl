@@ -6,7 +6,7 @@
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 16:54:31 by amazurok          #+#    #+#             */
-/*   Updated: 2018/06/03 17:14:34 by amazurok         ###   ########.fr       */
+/*   Updated: 2018/06/05 15:24:08 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,14 @@ char	*ft_my_read(int fd, t_kkey *key)
 	char	buf[101];
 	char	*str;
 	ssize_t	ret;
-	char	*alg;
 
-	alg = key->md5 ? "md5" : "sha256";
-	alg = key->sha224 ? "sha224" : alg;
-	alg = key->sha384 ? "sha384" : alg;
-	alg = key->sha512 ? "sha512" : alg;
 	if (fd < 0)
 	{
 		ft_printf("ft_ssl: %s: %s: No such file or directory\n", \
-		alg, key->nfn[key->ifn++]);
+		key->alg->name, key->nfn[key->ifn++]);
 		return (NULL);
 	}
-	str = NULL;
+	str = ft_strnew(0);
 	while ((ret = read(fd, buf, 100)) > 0)
 	{
 		buf[ret] = '\0';
@@ -48,7 +43,7 @@ int		main(int c, char **v)
 	i = 0;
 	ft_read_key(c, v, &key);
 	key.h ? ft_help(&key) : 0;
-	if (!key.md5 && !key.sha256 && !key.sha512 && !key.sha224 && !key.sha384)
+	if (!key.al)
 		ft_usage_ssl(&key, NULL);
 	if ((!key.s && !key.n_fd) || key.p)
 	{
