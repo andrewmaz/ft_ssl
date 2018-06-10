@@ -24,7 +24,7 @@ t_algo	*ft_add_algo(void)
 	t_algo			*tmp;
 	int				i;
 	const t_cr_alg	alg[] = {ft_create_md5, ft_create_sha224, ft_create_sha256,
-			ft_create_sha384, ft_create_sha512, NULL};
+			ft_create_sha384, ft_create_sha512};
 
 	i = 0;
 	tmp = NULL;

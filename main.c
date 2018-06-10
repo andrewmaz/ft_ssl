@@ -6,22 +6,23 @@
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 16:54:31 by amazurok          #+#    #+#             */
-/*   Updated: 2018/06/05 15:24:08 by amazurok         ###   ########.fr       */
+/*   Updated: 2018/06/10 17:05:38 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ssl.h"
 
-char	*ft_my_read(int fd, t_kkey *key)
+char	*ft_my_read(t_kkey *key)
 {
+	int		fd;
 	char	buf[101];
 	char	*str;
 	ssize_t	ret;
 
-	if (fd < 0)
+	if ((fd = key->flag == 'p' ? 0 : open(key->s, O_RDONLY)) < 0)
 	{
 		ft_printf("ft_ssl: %s: %s: No such file or directory\n", \
-		key->alg->name, key->nfn[key->ifn++]);
+		key->alg->name, key->s);
 		return (NULL);
 	}
 	str = ft_strnew(0);
@@ -33,31 +34,59 @@ char	*ft_my_read(int fd, t_kkey *key)
 	return (str);
 }
 
+char	*ft_do_flag(t_kkey *key, int c, char **v, int *i)
+{
+	if (key->flag == 'p')
+		return (ft_my_read(key));
+	else if (key->flag == 'q')
+		key->q = 1;
+	else if (key->flag =='r')
+		key->r = 1;
+	else if (key->flag == 'h')
+		key->h = 1;
+	else if (key->flag == 's' && (*i + 1 < c))
+		return (ft_strdup(v[++*i]));
+	else if (key->f)
+		return (ft_my_read(key));
+	else
+		ft_help_key(key, v[*i]);
+	return (NULL);
+}
+
 int		main(int c, char **v)
 {
-	size_t	len;
+	//size_t	len;
 	int		i;
 	char	*line;
 	t_kkey	key;
+	int		stdin;
 
-	i = 0;
-	ft_read_key(c, v, &key);
-	key.h ? ft_help(&key) : 0;
-	if (!key.al)
-		ft_usage_ssl(&key, NULL);
-	if ((!key.s && !key.n_fd) || key.p)
+	stdin = c == 1;
+	ft_bzero_key(&key);
+	v = c == 1 ? ft_read_sdtin() : v;
+	c = (c == 1 ? (int)ft_dstrlen(v) : c);
+	i = !stdin;
+	while (i < c)
 	{
-		line = ft_my_read(0, &key);
-		key.p ? ft_printf("%s", line) : 0;
-		line ? ft_algo(line, ft_strlen(line), &key, 0) : 0;
+		if (key.flag || key.f)
+		{
+			key.s = key.f ? v[i] : NULL;
+			if ((line = ft_do_flag(&key, c, v, &i)))
+			{
+				key.flag == 'p' ? ft_printf("%s", line) : 0;
+				key.s = key.f ? key.s : line;
+				ft_algo(line, ft_strlen(line), &key, (key.flag != 'p'));
+				ft_strdel(&line);
+			}
+			key.flag = 0;
+			i++;
+		}
+		else if (v[i][0] == '-' && ft_isalpha(v[i][1]) && !v[i][2] && key.al)
+			key.flag = v[i][1];
+		else if (v[i][0] != '-')
+			i = ft_read_nonmin(&key, v, i);
+		else
+			ft_help_key(&key, v[i]);
 	}
-	while (key.is < ft_num_word(key.s, 1) || i < key.n_fd)
-	{
-		line = (key.is < ft_num_word(key.s, 1)) ? key.ns[key.is] : \
-				ft_my_read(key.fd[i++], &key);
-		len = ft_strlen(line);
-		line ? ft_algo(line, len, &key, 1) : 0;
-		ft_strdel(&line);
-	}
-	ft_delkey(&key, 0);
+	ft_delkey(&key);
 }

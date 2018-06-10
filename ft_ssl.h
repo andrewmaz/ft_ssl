@@ -6,7 +6,7 @@
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 17:00:28 by amazurok          #+#    #+#             */
-/*   Updated: 2018/06/05 14:41:55 by amazurok         ###   ########.fr       */
+/*   Updated: 2018/06/10 17:15:20 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 
 # define T1 5
 # define T2 2
+
+# define SEP 1
 
 # include "./libftprintf/libft/libft.h"
 
@@ -64,18 +66,12 @@ typedef struct	s_kkey
 {
 	t_algo			*alg;
 	int				al;
-	int				p;
+	int				flag;
 	int				q;
 	int				r;
 	int				h;
-	char			*s;
-	char			**ns;
-	int				is;
-	int				*fd;
-	char			*fn;
-	char			**nfn;
-	int				ifn;
-	int				n_fd;
+	int				f;
+  	char			*s;
 }				t_kkey;
 
 typedef	void	(*t_cr_alg)(t_algo*);
@@ -107,7 +103,7 @@ t_uint			*ft_gen_addwords(t_uint *msg);
 t_ulint			*ft_gen_addwords512(t_ulint *msg);
 void			ft_algo(const char *str, size_t len, t_kkey *key, int k);
 void			ft_help(t_kkey *key);
-void			ft_delkey(t_kkey *key, int k);
+void			ft_delkey(t_kkey *key);
 void			ft_del_m(t_md5 *lst);
 t_uint			*ft_create_buf256(void);
 t_uint			*ft_create_buf224(void);
@@ -132,5 +128,9 @@ void			ft_create_sha384(t_algo *alg);
 void			ft_create_sha512(t_algo *alg);
 t_algo			*ft_go2head(t_algo *alg);
 void			ft_pint_name_c(t_algo *alg, char c);
+char	**ft_read_sdtin(void);
+int		ft_set_key(t_kkey *key, int i, char **v, int c);
+int		ft_read_nonmin(t_kkey *key, char **v, int i);
+
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 11:53:57 by amazurok          #+#    #+#             */
-/*   Updated: 2018/05/24 11:53:57 by amazurok         ###   ########.fr       */
+/*   Updated: 2018/06/10 17:01:30 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,12 @@ void	ft_del_algo(t_algo *algo)
 	}
 }
 
-void	ft_delkey(t_kkey *key, int k)
+void	ft_delkey(t_kkey *key)
 {
-	ft_dstrdel(&key->nfn);
-	k ? ft_dstrdel(&key->ns) : free(key->ns);
-	ft_strdel(&key->s);
-	ft_strdel(&key->fn);
-	key->fd ? free(key->fd) : 0;
+	//ft_dstrdel(&key->nfn);
+	//k ? ft_dstrdel(&key->ns) : free(key->ns);
+	//ft_strdel(&key->s);
+	//ft_strdel(&key->fn);
+	//key->fd ? free(key->fd) : 0;
 	ft_del_algo(key->alg);
 }

@@ -39,7 +39,7 @@ void	ft_help(t_kkey *key)
 	ft_printf("| %-14s %-58s|\n", "-s \"line\"", \
 	"<print the sum of the given string>");
 	ft_printf("|%s__%s|\n", s, s);
-	ft_delkey(key, 1);
+	ft_delkey(key);
 	exit(1);
 }
 
@@ -55,7 +55,7 @@ void	ft_usage_ssl(t_kkey *key, char *str)
 		ft_pint_name_c(key->alg, '\n');
 		ft_printf("\nCipher commands:\n\n");
 	}
-	ft_delkey(key, 1);
+	ft_delkey(key);
 	exit(1);
 }
 
@@ -70,6 +70,6 @@ void	ft_help_key(t_kkey *key, char *str)
 	ft_printf("%-10s %-s\n", "-r", "reverse the format of the output");
 	ft_printf("%-10s %-s\n", "-s \"line\"", \
 	"print the sum of the given string");
-	ft_delkey(key, 1);
+	ft_delkey(key);
 	exit(1);
 }

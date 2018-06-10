@@ -6,7 +6,7 @@
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 16:26:17 by amazurok          #+#    #+#             */
-/*   Updated: 2018/06/05 12:40:29 by amazurok         ###   ########.fr       */
+/*   Updated: 2018/06/10 16:52:08 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,13 @@ void	ft_print_res_md5(t_md5 *a, t_kkey *key, int k)
 	if (k && !key->q && !key->r)
 	{
 		ft_print_upper(key->alg->name);
-		key->is < ft_num_word(key->s, 1) ? ft_printf(" (\"%s\") = ", \
-		key->ns[key->is]) : ft_printf(" (%s) = ", key->nfn[key->ifn]);
+		key->f ? ft_printf(" (%s) = ", key->s): ft_printf(" (\"%s\") = ", key->s);
 	}
 	ft_print_hash_md5(a);
 	if (k && !key->q && key->r)
 	{
-		key->is < ft_num_word(key->s, 1) ? ft_printf(" \"%s\"", \
-		key->ns[key->is]) : ft_printf(" %s", key->nfn[key->ifn]);
+		 key->f ? ft_printf(" %s", key->s) : ft_printf(" \"%s\"", key->s);
 	}
-	if (k)
-		key->is < ft_num_word(key->s, 1) ? key->is++ : key->ifn++;
 	ft_printf("\n");
 }
 
@@ -66,18 +62,12 @@ void	ft_print_res_sha(t_uint *hash, t_kkey *key, int k)
 	if (k && !key->q && !key->r)
 	{
 		ft_print_upper(key->alg->name);
-		key->is < ft_num_word(key->s, 1) ? ft_printf(" (\"%s\") = ", \
-		key->ns[key->is]) : ft_printf(" (%s) = ", key->nfn[key->ifn]);
+		key->f ? ft_printf(" (%s) = ", key->s): ft_printf(" (\"%s\") = ", key->s);
 	}
 	while (i < key->alg->word)
 		ft_printf("%.8x", hash[i++]);
 	if (k && !key->q && key->r)
-	{
-		key->is < ft_num_word(key->s, 1) ? ft_printf(" \"%s\"", \
-		key->ns[key->is]) : ft_printf(" %s", key->nfn[key->ifn]);
-	}
-	if (k)
-		key->is < ft_num_word(key->s, 1) ? key->is++ : key->ifn++;
+		key->f ? ft_printf(" %s", key->s) : ft_printf(" \"%s\"", key->s);
 	ft_printf("\n");
 }
 
@@ -89,17 +79,11 @@ void	ft_print_res_sha512(t_ulint *hash, t_kkey *key, int k)
 	if (k && !key->q && !key->r)
 	{
 		ft_print_upper(key->alg->name);
-		key->is < ft_num_word(key->s, 1) ? ft_printf(" (\"%s\") = ", \
-		key->ns[key->is]) : ft_printf(" (%s) = ", key->nfn[key->ifn]);
+		key->f ? ft_printf(" (%s) = ", key->s): ft_printf(" (\"%s\") = ", key->s);
 	}
 	while (i < key->alg->word)
 		ft_printf("%z.16x", hash[i++]);
 	if (k && !key->q && key->r)
-	{
-		key->is < ft_num_word(key->s, 1) ? ft_printf(" \"%s\"", \
-		key->ns[key->is]) : ft_printf(" %s", key->nfn[key->ifn]);
-	}
-	if (k)
-		key->is < ft_num_word(key->s, 1) ? key->is++ : key->ifn++;
+		key->f ? ft_printf(" %s", key->s) : ft_printf(" \"%s\"", key->s);
 	ft_printf("\n");
 }
