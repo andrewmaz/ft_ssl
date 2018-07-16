@@ -6,7 +6,7 @@
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 17:00:28 by amazurok          #+#    #+#             */
-/*   Updated: 2018/06/10 17:15:20 by amazurok         ###   ########.fr       */
+/*   Updated: 2018/07/16 16:12:51 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,9 +128,14 @@ void			ft_create_sha384(t_algo *alg);
 void			ft_create_sha512(t_algo *alg);
 t_algo			*ft_go2head(t_algo *alg);
 void			ft_pint_name_c(t_algo *alg, char c);
-char	**ft_read_sdtin(void);
-int		ft_set_key(t_kkey *key, int i, char **v, int c);
-int		ft_read_nonmin(t_kkey *key, char **v, int i);
+char			**ft_read_sdtin(void);
+int				ft_set_key(t_kkey *key, int i, char **v, int c);
+int				ft_read_nonmin(t_kkey *key, char **v, int i);
 
+
+void			ft_create_base64(t_algo *alg);
+void			ft_base64_enc(t_kkey *key, t_uchar *mg, size_t len, int k);
+size_t			ft_newlen_base(size_t len);
+void	ft_base64_dec(t_kkey *key, t_uchar *mg, size_t len, int k);
 
 #endif

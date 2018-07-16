@@ -6,7 +6,7 @@
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 18:54:58 by amazurok          #+#    #+#             */
-/*   Updated: 2018/06/05 13:23:42 by amazurok         ###   ########.fr       */
+/*   Updated: 2018/07/16 15:02:44 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	ft_sha256_224(t_kkey *key, t_uchar *mg, size_t len, int k)
 	hash ? free(hash) : 0;
 }
 
-void	ft_algo(const char *str, size_t len, t_kkey *key, int k)
+void	ft_hash(const char *str, size_t len, t_kkey *key, int k)
 {
 	size_t	nlen;
 	t_uchar	*mg;
@@ -69,4 +69,12 @@ void	ft_algo(const char *str, size_t len, t_kkey *key, int k)
 	len *= BIT;
 	key->alg->alg(key, mg, len, k);
 	free(mg);
+}
+
+void	ft_algo(const char *str, size_t len, t_kkey *key, int k)
+{
+	if (key->alg->word > 0)
+		ft_hash(str, len, key, k);
+	else
+		key->alg->alg(key, (t_uchar*)str, len, k);
 }

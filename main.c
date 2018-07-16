@@ -55,7 +55,6 @@ char	*ft_do_flag(t_kkey *key, int c, char **v, int *i)
 
 int		main(int c, char **v)
 {
-	//size_t	len;
 	int		i;
 	char	*line;
 	t_kkey	key;
