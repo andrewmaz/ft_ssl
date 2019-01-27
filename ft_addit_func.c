@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_addit_func.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: amazurok <amazurok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/05 13:09:41 by amazurok          #+#    #+#             */
-/*   Updated: 2018/07/16 15:11:43 by amazurok         ###   ########.fr       */
+/*   Updated: 2019/01/27 20:33:40 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_algo	*ft_add_algo(void)
 	t_algo			*tmp;
 	int				i;
 	const t_cr_alg	alg[] = {ft_create_md5, ft_create_sha224, ft_create_sha256,
-			ft_create_sha384, ft_create_sha512, ft_create_base64, NULL};
+			ft_create_sha384, ft_create_sha512, NULL};
 
 	i = 0;
 	tmp = NULL;

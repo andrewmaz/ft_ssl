@@ -3,18 +3,19 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: amazurok <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: amazurok <amazurok@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/23 11:59:18 by amazurok          #+#    #+#              #
-#    Updated: 2018/06/02 17:24:28 by amazurok         ###   ########.fr        #
+#    Updated: 2019/01/27 20:35:20 by amazurok         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ft_ssl
 
-SRC = ft_char2int.c ft_del.c ft_help.c ft_md5.c ft_new.c ft_print.c ft_read_key.c \
-		ft_rounds_md5.c ft_rounds_sha.c ft_rounds_sha512.c ft_sha256.c ft_sha512.c \
-		ft_start_algo.c main.c ft_create_buf.c ft_addit_func.c ft_new_algo_struct.c
+SRC = ft_addit_func.c ft_char2int.c ft_create_buf.c ft_del.c ft_help.c ft_md5.c \
+	ft_new.c ft_new_sha_algo.c ft_print.c ft_read_key.c \
+	ft_rounds_md5.c ft_rounds_sha512.c ft_rounds_sha.c ft_sha256.c ft_sha512.c \
+	ft_start_algo.c main.c
 
 MLIB = make -C libftprintf
 
