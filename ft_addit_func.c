@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_addit_func.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: amazurok <amazurok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/05 13:09:41 by amazurok          #+#    #+#             */
-/*   Updated: 2018/07/16 15:11:43 by amazurok         ###   ########.fr       */
+/*   Updated: 2019/01/27 21:40:00 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ssl.h"
+#include "./inc/ft_ssl.h"
 
 t_algo	*ft_go2head(t_algo *alg)
 {
