@@ -53,10 +53,25 @@ char	*ft_do_flag(t_kkey *key, int c, char **v, int *i)
 	return (NULL);
 }
 
+void ft_main_algo(t_kkey *key, int c, char **v, int *i)
+{
+    char	*line;
+
+    key->s = key->f ? v[*i] : NULL;
+    if ((line = ft_do_flag(key, c, v, i)))
+    {
+        key->flag == 'p' ? ft_printf("%s", line) : 0;
+        key->s = key->f ? key->s : line;
+        ft_algo(line, ft_strlen(line), key, (key->flag != 'p'));
+        ft_strdel(&line);
+    }
+    key->flag = 0;
+    ++*i;
+}
+
 int		main(int c, char **v)
 {
 	int		i;
-	char	*line;
 	t_kkey	key;
 	int		stdin;
 
@@ -68,18 +83,7 @@ int		main(int c, char **v)
 	while (i < c)
 	{
 		if (key.flag || key.f)
-		{
-			key.s = key.f ? v[i] : NULL;
-			if ((line = ft_do_flag(&key, c, v, &i)))
-			{
-				key.flag == 'p' ? ft_printf("%s", line) : 0;
-				key.s = key.f ? key.s : line;
-				ft_algo(line, ft_strlen(line), &key, (key.flag != 'p'));
-				ft_strdel(&line);
-			}
-			key.flag = 0;
-			i++;
-		}
+            ft_main_algo(&key, c, v, &i);
 		else if (v[i][0] == '-' && ft_isalpha(v[i][1]) && !v[i][2] && key.al)
 			key.flag = v[i][1];
 		else if (v[i][0] != '-')
